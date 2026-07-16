@@ -47,12 +47,12 @@ export default function Header() {
             width={140}
             height={60}
             priority
-            style={{ height: '100px' }}
-            className="w-32 transition-opacity hover:opacity-80 md:w-36"
+            className="h-auto w-24 object-contain transition-opacity hover:opacity-80 lg:w-28"
           />
         </Link>
 
-        <nav className="text-md hidden items-center gap-5 font-sans tracking-wide md:flex lg:gap-8">
+        {/* Mudado de md:flex para lg:flex */}
+        <nav className="text-md hidden items-center gap-5 font-sans tracking-wide lg:flex lg:gap-8">
           {HEADER_LINKS.map((link) => (
             <Link
               key={link.label}
@@ -65,14 +65,16 @@ export default function Header() {
           ))}
         </nav>
 
-        <div className="hidden shrink-0 md:block">
+        {/* Mudado de md:block para lg:block */}
+        <div className="hidden shrink-0 lg:block">
           <Button href="#contact" variant="primary" size="header">
             Solicitar Orçamento
           </Button>
         </div>
 
+        {/* Mudado de md:hidden para lg:hidden */}
         <button
-          className="shrink-0 text-white md:hidden"
+          className="shrink-0 text-white lg:hidden"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label={mobileMenuOpen ? 'Fechar menu' : 'Abrir menu'}
           aria-expanded={mobileMenuOpen}
@@ -90,7 +92,8 @@ export default function Header() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            className="absolute top-full left-0 flex w-full flex-col items-center gap-6 border-t border-white/10 bg-black/95 py-8 backdrop-blur-xl md:hidden"
+            // Mudado de md:hidden para lg:hidden
+            className="absolute top-full left-0 flex w-full flex-col items-center gap-6 border-t border-white/10 bg-black/95 py-8 backdrop-blur-xl lg:hidden"
           >
             {HEADER_LINKS.map((link) => (
               <Link
