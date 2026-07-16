@@ -12,9 +12,17 @@ export default function Hero() {
 
   return (
     <section className="relative flex h-[95vh] w-full items-center overflow-hidden">
-      {/* Background */}
       <div className="bg-brand-darkbrown absolute inset-0 z-0">
-        <video autoPlay loop muted playsInline className="h-full w-full object-cover object-center">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          poster="/hero/hero-poster.webp"
+          className="h-full w-full object-cover object-center"
+        >
+          <source src="/hero/hero-video.webm" type="video/webm" />
           <source src="/hero/hero-video.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-black/60 md:bg-black/50"></div>

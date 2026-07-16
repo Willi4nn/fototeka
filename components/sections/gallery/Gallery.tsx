@@ -1,8 +1,8 @@
 'use client';
 
-import { useCallback, useMemo, useState } from 'react';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
+import { useCallback, useMemo, useState } from 'react';
 
 import Button from '@/components/ui/Button';
 import { CATEGORIES, type Category, type GalleryPhoto } from '@/lib/categories';
@@ -116,6 +116,7 @@ export default function Gallery({ photos }: GalleryProps) {
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
                   quality={75}
                   priority={isInitialLoad}
+                  fetchPriority={isInitialLoad ? 'high' : 'auto'}
                   loading={isInitialLoad ? 'eager' : 'lazy'}
                   placeholder={isInitialLoad && photo.blurDataURL ? 'blur' : 'empty'}
                   blurDataURL={isInitialLoad ? photo.blurDataURL : undefined}

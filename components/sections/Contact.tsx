@@ -4,10 +4,10 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 
 import Button from '@/components/ui/Button';
+import SectionHeader from './SectionHeader';
 
-// Estilos reutilizáveis
 const inputClass =
-  'w-full border border-brand-darkbrown/15 bg-brand-beige/20 px-4 py-2.5 font-sans text-[14px] text-brand-darkbrown outline-none transition-all duration-300 placeholder:text-brand-darkbrown/40 hover:border-brand-terracotta/40 focus:border-brand-terracotta focus:bg-white focus:ring-2 focus:ring-brand-terracotta/20 rounded-lg';
+  'w-full border border-brand-darkbrown/50 bg-brand-beige/20 px-4 py-2.5 font-sans text-[14px] text-brand-darkbrown outline-none transition-all duration-300 placeholder:text-brand-darkbrown/50 hover:border-brand-terracotta/50 focus:border-brand-terracotta focus:bg-white focus:ring-2 focus:ring-brand-terracotta/20';
 const labelClass =
   'mb-1.5 ml-1 block font-sans text-[10px] font-bold uppercase tracking-widest text-brand-darkbrown/60';
 const selectIcon = (
@@ -78,10 +78,14 @@ export default function Contact() {
   };
 
   return (
-    <section
-      id="contact"
-      className="bg-brand-beige relative z-10 w-full overflow-hidden py-12 md:py-20"
-    >
+    <section id="contact" className="bg-brand-beige relative z-10 w-full overflow-hidden py-16">
+      <SectionHeader
+        subtitle="Vamos Conversar"
+        subtitleClassName="mb-2 text-3xl md:text-4xl"
+        title="Solicite seu Orçamento."
+        titleClassName="mb-4 text-2xl md:mb-5 md:text-[2.5rem] md:leading-tight"
+      />
+
       <div className="relative mx-auto max-w-3xl px-6 md:px-8">
         <iframe
           name="hidden_iframe"
@@ -90,17 +94,7 @@ export default function Contact() {
           onLoad={handleIframeLoad}
         ></iframe>
 
-        <div className="mx-auto mb-8 flex flex-col items-center md:mb-10">
-          <p className="text-brand-terracotta mb-1 text-center font-(family-name:--font-parisienne) text-3xl md:text-4xl">
-            Vamos Conversar
-          </p>
-          <h2 className="text-brand-darkbrown mb-4 text-center font-sans text-2xl font-black tracking-wide uppercase md:mb-5 md:text-[2.5rem] md:leading-tight">
-            Solicite seu Orçamento.
-          </h2>
-          <div className="bg-brand-terracotta h-1 w-16 md:h-1.5 md:w-20" />
-        </div>
-
-        <div className="shadow-brand-darkbrown/5 relative mx-auto rounded-md bg-white p-6 shadow-xl sm:p-8 md:p-10">
+        <div className="shadow-brand-darkbrown/10 relative mx-auto bg-white p-6 shadow-xl sm:p-8 md:p-10">
           <AnimatePresence mode="wait">
             {status === 'success' ? (
               <motion.div
@@ -146,7 +140,7 @@ export default function Contact() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0, filter: 'blur(4px)' }}
-                className="grid gap-x-4 gap-y-5 md:grid-cols-12"
+                className="grid gap-x-4 gap-y-4 md:grid-cols-12"
               >
                 <input type="hidden" name="fcelular" value={phone} />
                 <input type="hidden" name="full_fcelular" value={`+55${phone}`} />
@@ -252,16 +246,17 @@ export default function Contact() {
                   <label className="text-brand-darkbrown/60 mb-3 text-center font-sans text-[10px] font-bold tracking-widest uppercase">
                     Como prefere receber o orçamento?
                   </label>
-                  <div className="flex w-full flex-wrap justify-center gap-2 sm:w-auto">
+
+                  <div className="border-brand-darkbrown/50 bg-brand-beige/20 flex w-full overflow-hidden border sm:w-auto">
                     {['WhatsApp', 'E-mail', 'Telefone'].map((m) => (
                       <button
                         key={m}
                         type="button"
                         onClick={() => setMethod(m)}
-                        className={`flex-1 rounded-full px-5 py-2 font-sans text-xs font-semibold transition-all sm:flex-none ${
+                        className={`border-brand-darkbrown/50 flex-1 border-r px-5 py-2 font-sans text-xs font-semibold transition-all last:border-r-0 sm:flex-none ${
                           method === m
-                            ? 'bg-brand-terracotta shadow-brand-terracotta/25 text-white shadow-md'
-                            : 'bg-brand-beige/50 text-brand-darkbrown/60 hover:bg-brand-beige hover:text-brand-darkbrown'
+                            ? 'bg-brand-terracotta text-white shadow-inner'
+                            : 'text-brand-darkbrown/60 hover:bg-brand-beige/50 hover:text-brand-darkbrown'
                         }`}
                       >
                         {m}
@@ -270,7 +265,7 @@ export default function Contact() {
                   </div>
                 </div>
 
-                <div className="mt-6 flex justify-center md:col-span-12">
+                <div className="mt-4 flex justify-center md:col-span-12">
                   <Button
                     type="submit"
                     variant="primary"

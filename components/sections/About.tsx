@@ -1,5 +1,9 @@
+'use client';
+
+import { cn } from '@/lib/utils';
 import { Camera, Glasses, Images, Infinity as InfinityIcon, Users } from 'lucide-react';
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
 
 const beneficios = [
   {
@@ -25,20 +29,50 @@ const beneficios = [
   { icon: Camera, title: 'Fotos Digitais', text: 'Fotos digitais entregues em alta qualidade.' },
 ] as const;
 
-const fotosTirinha = [
-  { src: '/galeria/20251201202957-1.jpg', alt: 'Tirinha 1' },
-  { src: '/galeria/20251207004212-1.jpg', alt: 'Tirinha 2' },
-  { src: '/galeria/20260131235920-1.jpg', alt: 'Tirinha 3' },
+const polaroidSlides = [
+  { src: '/gallery/casamentos/20250705144900-3.webp', alt: 'Polaroide Cena 1' },
+  { src: '/gallery/casamentos/IMG_0082_20260111_000540.webp', alt: 'Polaroide Cena 2' },
+  { src: '/gallery/casamentos/IMG_0191_20251213_210921_3600.webp', alt: 'Polaroide Cena 3' },
 ];
 
-const fotosPolaroide = [
-  { src: '/galeria/IMG_0102_20250906_233419_3600.jpeg', alt: 'Polaroide Destaque' },
+const tirinhaSlides = [
+  [
+    { src: '/gallery/aniversarios/20251201202957-1.webp', alt: 'Tirinha 1A' },
+    { src: '/gallery/aniversarios/20250628213749-4.webp', alt: 'Tirinha 1B' },
+    { src: '/gallery/aniversarios/20251201201346-3.webp', alt: 'Tirinha 1C' },
+  ],
+  [
+    { src: '/gallery/casamentos/IMG_0027_20260604_220739.webp', alt: 'Tirinha 2A' },
+    { src: '/gallery/casamentos/IMG_0033_20260604_221007.webp', alt: 'Tirinha 2B' },
+    { src: '/gallery/casamentos/IMG_0038_20250920_223849_3600.webp', alt: 'Tirinha 2C' },
+  ],
+  [
+    { src: '/gallery/debutantes/20250920231136-2.webp', alt: 'Tirinha 3A' },
+    { src: '/gallery/debutantes/20250920231822-3.webp', alt: 'Tirinha 3B' },
+    { src: '/gallery/casamentos/IMG_0042_20260110_234917.webp', alt: 'Tirinha 3C' },
+  ],
 ];
 
 export default function About() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isFlashing, setIsFlashing] = useState(false);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsFlashing(true);
+      setTimeout(() => {
+        setActiveIndex((prev) => (prev + 1) % 3);
+      }, 100);
+      setTimeout(() => {
+        setIsFlashing(false);
+      }, 200);
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <section id="about" className="bg-brand-beige relative z-10 w-full overflow-hidden py-16">
-      {/* Grafismo de fundo (decorativo) */}
+    <section id="about" className="bg-brand-beige relative z-10 w-full overflow-hidden py-8">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute top-24 -left-24 z-0 h-105 w-105 md:top-1/2 md:-left-16 md:h-160 md:w-160 md:-translate-y-1/2"
@@ -81,24 +115,39 @@ export default function About() {
             </div>
           </div>
 
-          {/* Coluna de fotos */}
           <div className="relative flex h-70 w-full items-center justify-center md:h-100 lg:mt-0">
             <div className="absolute top-2 left-0 z-20 hidden w-30 -rotate-6 cursor-grab rounded-sm border border-black/5 bg-white p-2 pb-5 shadow-2xl transition-transform duration-300 ease-out hover:z-50 hover:scale-105 hover:rotate-0 active:cursor-grabbing md:left-[10%] md:block md:w-30 md:p-2.5 md:pb-7">
+              <div
+                className={cn(
+                  'pointer-events-none absolute inset-0 z-50 rounded-sm bg-white transition-opacity',
+                  isFlashing
+                    ? 'opacity-100 duration-75 ease-in'
+                    : 'opacity-0 duration-700 ease-out',
+                )}
+              />
+
               <div className="bg-brand-midbrown/30 absolute -top-3 left-1/2 h-4 w-12 -translate-x-1/2 -rotate-2 shadow-sm md:h-5 md:w-14" />
 
               <div className="flex flex-col gap-1.5 md:gap-2">
-                {fotosTirinha.map((foto, idx) => (
+                {[0, 1, 2].map((slotIdx) => (
                   <div
-                    key={idx}
+                    key={slotIdx}
                     className="relative aspect-square w-full overflow-hidden bg-gray-200"
                   >
-                    <Image
-                      src={foto.src}
-                      alt={foto.alt}
-                      fill
-                      sizes="150px"
-                      className="object-cover"
-                    />
+                    {tirinhaSlides.map((slide, slideIdx) => (
+                      <Image
+                        key={slideIdx}
+                        src={slide[slotIdx].src}
+                        alt={slide[slotIdx].alt}
+                        fill
+                        sizes="150px"
+                        priority={slideIdx === 0}
+                        className={cn(
+                          'object-cover transition-opacity duration-0',
+                          activeIndex === slideIdx ? 'opacity-100' : 'opacity-0',
+                        )}
+                      />
+                    ))}
                   </div>
                 ))}
               </div>
@@ -114,15 +163,32 @@ export default function About() {
             </div>
 
             <div className="absolute top-10 left-1/2 z-30 w-64 -translate-x-1/2 rotate-6 cursor-grab rounded-sm border border-black/5 bg-white p-2.5 pb-10 shadow-2xl transition-transform duration-300 ease-out hover:z-50 hover:scale-105 hover:rotate-0 active:cursor-grabbing md:top-10 md:right-[5%] md:left-auto md:w-104 md:translate-x-0 md:rotate-8 md:p-3 md:pb-12">
+              <div
+                className={cn(
+                  'pointer-events-none absolute inset-0 z-50 rounded-sm bg-white transition-opacity',
+                  isFlashing
+                    ? 'opacity-100 duration-75 ease-in'
+                    : 'opacity-0 duration-700 ease-out',
+                )}
+              />
+
               <div className="bg-brand-midbrown/25 absolute -top-4 left-1/2 h-5 w-14 -translate-x-1/2 rotate-3 shadow-sm md:h-6 md:w-16" />
+
               <div className="relative aspect-4/3 w-full overflow-hidden bg-gray-200">
-                <Image
-                  src={fotosPolaroide[0].src}
-                  alt={fotosPolaroide[0].alt}
-                  fill
-                  sizes="360px"
-                  className="object-cover"
-                />
+                {polaroidSlides.map((slide, slideIdx) => (
+                  <Image
+                    key={slideIdx}
+                    src={slide.src}
+                    alt={slide.alt}
+                    fill
+                    sizes="360px"
+                    priority={slideIdx === 0}
+                    className={cn(
+                      'object-cover transition-opacity duration-0',
+                      activeIndex === slideIdx ? 'opacity-100' : 'opacity-0',
+                    )}
+                  />
+                ))}
               </div>
             </div>
           </div>

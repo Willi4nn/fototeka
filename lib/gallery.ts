@@ -17,56 +17,70 @@ const FOLDER_TO_CATEGORY: Record<string, Exclude<Category, 'TODOS'>> = {
 
 const VALID_EXTENSIONS = /\.(webp|jpe?g|png)$/i;
 
+async function processImage(
+  folder: string,
+  file: string,
+  category: Exclude<Category, 'TODOS'>,
+): Promise<GalleryPhoto | null> {
+  const galleryDir = path.join(process.cwd(), 'public', 'gallery');
+  const filePath = path.join(galleryDir, folder, file);
+
+  try {
+    const buffer = await fs.readFile(filePath);
+
+    const metadata = await sharp(buffer).metadata();
+
+    if (!metadata.width || !metadata.height) return null;
+
+    const blurBuffer = await sharp(buffer)
+      .resize(8, Math.round(8 * (metadata.height / metadata.width)))
+      .webp({ quality: 20 })
+      .toBuffer();
+
+    const blurDataURL = `data:image/webp;base64,${blurBuffer.toString('base64')}`;
+
+    return {
+      id: `${folder}/${file}`,
+      src: `/gallery/${folder}/${file}`,
+      category,
+      width: metadata.width,
+      height: metadata.height,
+      blurDataURL,
+    };
+  } catch (error) {
+    console.warn(`[gallery] failed to process ${filePath}:`, error);
+    return null;
+  }
+}
+
 export async function getGalleryPhotos(): Promise<GalleryPhoto[]> {
   const galleryDir = path.join(process.cwd(), 'public', 'gallery');
+  const allPhotos: GalleryPhoto[] = [];
 
-  const listsByFolder = await Promise.all(
-    Object.entries(FOLDER_TO_CATEGORY).map(async ([folder, category]) => {
-      let files: string[] = [];
+  for (const [folder, category] of Object.entries(FOLDER_TO_CATEGORY)) {
+    try {
+      const folderPath = path.join(galleryDir, folder);
+
       try {
-        files = (await fs.readdir(path.join(galleryDir, folder)))
-          .filter((file) => VALID_EXTENSIONS.test(file))
-          .sort();
+        await fs.access(folderPath);
       } catch {
-        return [];
+        continue;
       }
 
-      return Promise.all(
-        files.map(async (file): Promise<GalleryPhoto> => {
-          const filePath = path.join(galleryDir, folder, file);
+      const files = await fs.readdir(folderPath);
+      const validFiles = files.filter((file) => VALID_EXTENSIONS.test(file)).sort();
 
-          let width = 4;
-          let height = 5;
-          let blurDataURL: string | undefined;
-
-          try {
-            const buffer = await fs.readFile(filePath);
-            const image = sharp(buffer);
-
-            const metadata = await image.metadata();
-            if (metadata.width && metadata.height) {
-              width = metadata.width;
-              height = metadata.height;
-            }
-
-            const blurBuffer = await image.resize(10).webp({ quality: 10 }).toBuffer();
-            blurDataURL = `data:image/webp;base64,${blurBuffer.toString('base64')}`;
-          } catch (error) {
-            console.warn(`[gallery] failed to process ${filePath}:`, error);
-          }
-
-          return {
-            id: `${folder}/${file}`,
-            src: `/gallery/${folder}/${file}`,
-            category,
-            width,
-            height,
-            blurDataURL,
-          };
-        }),
+      const folderPhotos = await Promise.all(
+        validFiles.map((file) => processImage(folder, file, category)),
       );
-    }),
-  );
 
-  return listsByFolder.flat();
+      for (const photo of folderPhotos) {
+        if (photo) allPhotos.push(photo);
+      }
+    } catch (error) {
+      console.warn(`[gallery] failed to read folder ${folder}:`, error);
+    }
+  }
+
+  return allPhotos;
 }

@@ -1,12 +1,12 @@
 'use client';
 
-import { useRef } from 'react';
-import Image from 'next/image';
 import { motion, useReducedMotion, type Variants } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
+import Image from 'next/image';
+import { useRef } from 'react';
 
-import { cn } from '@/lib/utils';
 import { TESTIMONIALS } from '@/content/data';
+import { cn } from '@/lib/utils';
 import SectionHeader from './SectionHeader';
 
 const FADE_UP: Variants = {
@@ -28,8 +28,8 @@ export default function Testimonials() {
 
   return (
     <section
-      id="depoimentos"
-      className="bg-brand-midbrown relative z-10 w-full overflow-hidden py-16"
+      id="testimonials"
+      className="bg-brand-midbrown/80 relative z-10 w-full overflow-hidden py-16"
     >
       <Image
         src="/logos/icon-circle-foto-teka-2.png"
@@ -43,10 +43,10 @@ export default function Testimonials() {
         <SectionHeader
           className="mb-10"
           subtitle="Depoimentos"
-          subtitleClassName="mb-2 text-3xl text-brand-beige/80 md:text-4xl"
+          subtitleClassName="mb-2 text-3xl text-brand-beige/90 md:text-4xl"
           title="QUEM VIVE, RECOMENDA!"
           titleClassName="mb-4 text-2xl text-white md:mb-5 md:text-[2.5rem] md:leading-tight"
-          dividerClassName="w-20 md:h-1.5 md:w-24 bg-brand-terracotta"
+          dividerClassName="bg-brand-terracotta"
         />
 
         <div className="relative">
@@ -73,7 +73,7 @@ export default function Testimonials() {
               >
                 <div
                   className={cn(
-                    'group relative flex h-full flex-col justify-between rounded-sm bg-white p-6 shadow-lg transition-transform duration-500 hover:-translate-y-2 hover:rotate-0 hover:shadow-xl md:p-8',
+                    'group relative flex h-full flex-col justify-between bg-white p-6 shadow-lg transition-transform duration-500 hover:-translate-y-2 hover:rotate-0 hover:shadow-xl md:p-8',
                     index % 2 === 0 ? 'rotate-1 md:rotate-2' : '-rotate-1 md:-rotate-2',
                   )}
                 >

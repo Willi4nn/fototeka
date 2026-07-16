@@ -7,6 +7,8 @@ import Hero from '@/components/sections/Hero';
 import Services from '@/components/sections/Services';
 import Testimonials from '@/components/sections/Testimonials';
 
+export const revalidate = false;
+
 export default function Home() {
   const jsonLd = {
     '@context': 'https://schema.org',

@@ -1,5 +1,6 @@
 'use client';
 
+import { AnimatePresence, motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -38,7 +39,7 @@ export default function Header() {
         isScrolled ? 'bg-black/80 py-3 backdrop-blur-md' : 'bg-transparent py-5',
       )}
     >
-      <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-6 md:px-8 lg:px-12">
+      <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-4 md:px-4 lg:px-8">
         <Link href="/" className="flex shrink-0 items-center">
           <Image
             src="/logos/logo-foto-teka.svg"
@@ -46,18 +47,20 @@ export default function Header() {
             width={140}
             height={60}
             priority
-            className="h-18 w-auto transition-opacity hover:opacity-80"
+            style={{ height: '100px' }}
+            className="w-32 transition-opacity hover:opacity-80 md:w-36"
           />
         </Link>
 
-        <nav className="text-md hidden items-center gap-5 font-sans tracking-wide text-white md:flex lg:gap-8">
+        <nav className="text-md hidden items-center gap-5 font-sans tracking-wide md:flex lg:gap-8">
           {HEADER_LINKS.map((link) => (
             <Link
               key={link.label}
               href={link.href}
-              className="hover:text-brand-terracotta font-semibold whitespace-nowrap transition-colors"
+              className="group relative font-semibold whitespace-nowrap text-white/90 transition-colors duration-300 hover:text-white"
             >
               {link.label}
+              <span className="bg-brand-terracotta absolute -bottom-1 left-0 h-0.5 w-full origin-left scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100" />
             </Link>
           ))}
         </nav>
@@ -79,23 +82,42 @@ export default function Header() {
         </button>
       </div>
 
-      {mobileMenuOpen && (
-        <div
-          id="mobile-navigation"
-          className="absolute top-full left-0 flex w-full flex-col items-center gap-4 border-t border-white/10 bg-black/95 py-6 backdrop-blur-xl md:hidden"
-        >
-          {HEADER_LINKS.map((link) => (
-            <Link
-              key={link.label}
-              href={link.href}
-              onClick={() => setMobileMenuOpen(false)}
-              className="text-lg font-semibold text-white"
-            >
-              {link.label}
-            </Link>
-          ))}
-        </div>
-      )}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            id="mobile-navigation"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+            className="absolute top-full left-0 flex w-full flex-col items-center gap-6 border-t border-white/10 bg-black/95 py-8 backdrop-blur-xl md:hidden"
+          >
+            {HEADER_LINKS.map((link) => (
+              <Link
+                key={link.label}
+                href={link.href}
+                onClick={() => setMobileMenuOpen(false)}
+                className="group relative text-lg font-semibold text-white/90 transition-colors duration-300 hover:text-white"
+              >
+                {link.label}
+                <span className="bg-brand-terracotta absolute -bottom-1 left-0 h-0.5 w-full origin-left scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100" />
+              </Link>
+            ))}
+
+            <div className="mt-2 w-[80%] max-w-sm">
+              <Button
+                href="#contact"
+                variant="primary"
+                size="header"
+                className="w-full"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Solicitar Orçamento
+              </Button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

@@ -51,7 +51,7 @@ export const EQUIPMENT = [
   {
     title: 'Espelho Retrô',
     description:
-      'Elegância que encanta. O espelho retrô traz sofisticação e muita interatividade para seu evento.',
+      'Vintage e moderno. O espelho que decora o seu espaço e eterniza os seus melhores momentos.',
     image: '/services/espelho-retro.webp',
     features: [
       { icon: MapPin, text: 'TELA TOUCH INTERATIVA' },
@@ -62,7 +62,7 @@ export const EQUIPMENT = [
   {
     title: 'Espelho Mágico',
     description:
-      'Muito mais que um espelho, uma experiência mágica e personalizada para seus convidados.',
+      'Elegância que encanta, o espelho mágico traz sofisticação e muita interatividade.',
     image: '/services/espelho-magico.webp',
     features: [
       { icon: Star, text: 'ANIMAÇÕES PERSONALIZADAS' },
@@ -84,7 +84,7 @@ export const EQUIPMENT = [
   {
     title: 'Autógrafo Móvel',
     description:
-      'Os convidados deixam mensagens e desenhos digitais que tornam cada lembrança única e divertida.',
+      'As lembranças ganham voz e uma linda assinatura. A interação de vídeo perfeita para seus convidados.',
     image: '/services/autografo.webp',
     features: [
       { icon: Users, text: 'TELA TOUCH INTERATIVA' },
