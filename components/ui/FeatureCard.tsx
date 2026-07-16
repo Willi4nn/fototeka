@@ -51,7 +51,7 @@ export default function FeatureCard({
     <motion.li
       custom={index}
       variants={DEVELOP}
-      className="group border-brand-darkbrown hover:border-brand-terracotta relative flex h-full flex-col overflow-hidden rounded-md border bg-white text-center shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl"
+      className="group border-brand-darkbrown hover:border-brand-terracotta relative flex h-full flex-col overflow-hidden rounded-md border-2 bg-white text-center shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl"
     >
       <div className="bg-brand-beige/40 relative aspect-video w-full overflow-hidden">
         <motion.div variants={FOCUS} className="absolute inset-0">

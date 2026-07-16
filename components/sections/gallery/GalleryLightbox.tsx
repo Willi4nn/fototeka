@@ -1,11 +1,13 @@
 'use client';
 
 import { AnimatePresence, motion, type PanInfo, type Variants } from 'framer-motion';
+import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 import Image from 'next/image';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 import type { GalleryPhoto } from '@/lib/categories';
+import { cn } from '@/lib/utils';
 
 const SWIPE_CONFIDENCE_THRESHOLD = 10000;
 
@@ -15,18 +17,21 @@ function getSwipePower(offset: number, velocity: number) {
 
 const sliderVariants: Variants = {
   enter: (direction: number) => ({
-    x: direction > 0 ? 1000 : -1000,
+    x: direction > 0 ? '100%' : '-100%',
     opacity: 0,
+    scale: 0.98,
   }),
   center: {
     zIndex: 1,
     x: 0,
     opacity: 1,
+    scale: 1,
   },
   exit: (direction: number) => ({
     zIndex: 0,
-    x: direction < 0 ? 1000 : -1000,
+    x: direction < 0 ? '100%' : '-100%',
     opacity: 0,
+    scale: 0.98,
   }),
 };
 
@@ -43,6 +48,8 @@ export default function GalleryLightbox({ photos, initialIndex, onClose }: Galle
   const containerRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
+  const lastPaginateTime = useRef(0);
+
   const currentPhoto = photos[index];
 
   const requestClose = useCallback(() => {
@@ -51,6 +58,11 @@ export default function GalleryLightbox({ photos, initialIndex, onClose }: Galle
 
   const paginate = useCallback(
     (newDirection: number) => {
+      const now = performance.now();
+
+      if (now - lastPaginateTime.current < 40) return;
+      lastPaginateTime.current = now;
+
       setIndexState(([current]) => {
         const next = (current + newDirection + photos.length) % photos.length;
         return [next, newDirection];
@@ -82,18 +94,10 @@ export default function GalleryLightbox({ photos, initialIndex, onClose }: Galle
     closeButtonRef.current?.focus();
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        requestClose();
-        return;
-      }
-      if (event.key === 'ArrowRight') {
-        paginate(1);
-        return;
-      }
-      if (event.key === 'ArrowLeft') {
-        paginate(-1);
-        return;
-      }
+      if (event.key === 'Escape') requestClose();
+      if (event.key === 'ArrowRight') paginate(1);
+      if (event.key === 'ArrowLeft') paginate(-1);
+
       if (event.key === 'Tab') {
         const focusable = containerRef.current?.querySelectorAll<HTMLButtonElement>('button');
         if (!focusable || focusable.length === 0) return;
@@ -120,6 +124,9 @@ export default function GalleryLightbox({ photos, initialIndex, onClose }: Galle
 
   if (!currentPhoto) return null;
 
+  const btnClass =
+    'absolute z-20 flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-black/40 text-white/80 backdrop-blur-md transition-all duration-300 hover:scale-110 hover:border-brand-terracotta hover:bg-brand-terracotta hover:text-white hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-brand-terracotta focus:ring-offset-2 focus:ring-offset-black';
+
   return createPortal(
     <AnimatePresence onExitComplete={onClose}>
       {isVisible && (
@@ -128,93 +135,85 @@ export default function GalleryLightbox({ photos, initialIndex, onClose }: Galle
           role="dialog"
           aria-modal="true"
           aria-label="Visualização de foto ampliada"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 z-9999 flex items-center justify-center bg-black/95 backdrop-blur-xl"
-          onClick={requestClose}
+          initial={{ opacity: 0, backdropFilter: 'blur(0px)' }}
+          animate={{ opacity: 1, backdropFilter: 'blur(24px)' }}
+          exit={{ opacity: 0, backdropFilter: 'blur(0px)' }}
+          transition={{ duration: 0.3 }}
+          className="fixed inset-0 z-9999 flex items-center justify-center bg-black/95"
         >
+          {photos.length > 1 && (
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -z-50 h-px w-px overflow-hidden opacity-0"
+            >
+              {[-2, -1, 1, 2, 3].map((offset) => {
+                const preIndex = (index + offset + photos.length) % photos.length;
+                const photo = photos[preIndex];
+
+                if (!photo) return null;
+
+                return (
+                  <Image
+                    key={`preload-${photo.id}`}
+                    src={photo.src}
+                    width={photo.width}
+                    height={photo.height}
+                    unoptimized
+                    loading="eager"
+                    decoding="async"
+                    alt=""
+                  />
+                );
+              })}
+            </div>
+          )}
+
+          <div className="absolute inset-0 z-0 cursor-pointer" onClick={requestClose} />
+
           <button
             ref={closeButtonRef}
             type="button"
             onClick={requestClose}
-            className="absolute top-4 right-4 z-10 rounded-full bg-white/10 p-3 text-white transition-colors hover:bg-white/20 md:top-8 md:right-8"
+            className={cn(btnClass, 'top-4 right-4 md:top-8 md:right-8')}
             aria-label="Fechar galeria"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M18 6 6 18" />
-              <path d="m6 6 12 12" />
-            </svg>
+            <X size={24} strokeWidth={2.5} />
           </button>
 
-          <div className="absolute top-4 left-4 z-10 rounded-full bg-white/10 px-4 py-2 font-sans text-sm tracking-widest text-white md:top-8 md:left-8">
-            {index + 1} / {photos.length}
+          <div className="pointer-events-none absolute top-4 left-4 z-20 flex h-10 items-center justify-center rounded-full border border-white/10 bg-black/40 px-5 font-sans text-xs font-bold tracking-[0.2em] text-white/80 backdrop-blur-md md:top-8 md:left-8 md:text-sm">
+            {index + 1} <span className="mx-2 text-white/40">/</span> {photos.length}
           </div>
 
           {photos.length > 1 && (
             <>
               <button
                 type="button"
-                className="absolute left-2 z-10 hidden rounded-full bg-white/10 p-4 text-white transition-colors hover:bg-white/20 md:left-8 md:block"
-                onClick={(event) => {
-                  event.stopPropagation();
+                className={cn(btnClass, 'left-4 hidden md:flex lg:left-8')}
+                onClick={(e) => {
+                  e.stopPropagation();
                   paginate(-1);
                 }}
                 aria-label="Foto anterior"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="32"
-                  height="32"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="m15 18-6-6 6-6" />
-                </svg>
+                <ChevronLeft size={28} strokeWidth={2.5} className="-ml-0.5" />
               </button>
 
               <button
                 type="button"
-                className="absolute right-2 z-10 hidden rounded-full bg-white/10 p-4 text-white transition-colors hover:bg-white/20 md:right-8 md:block"
-                onClick={(event) => {
-                  event.stopPropagation();
+                className={cn(btnClass, 'right-4 hidden md:flex lg:right-8')}
+                onClick={(e) => {
+                  e.stopPropagation();
                   paginate(1);
                 }}
                 aria-label="Próxima foto"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="32"
-                  height="32"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="m9 18 6-6-6-6" />
-                </svg>
+                <ChevronRight size={28} strokeWidth={2.5} className="-mr-0.5" />
               </button>
             </>
           )}
 
-          <div className="relative h-full w-full overflow-hidden">
-            <AnimatePresence initial={false} custom={direction}>
+          <div className="relative flex h-full w-full max-w-7xl items-center justify-center overflow-hidden px-4 py-20 md:px-24">
+            <AnimatePresence initial={false} custom={direction} mode="popLayout">
               <motion.div
                 key={currentPhoto.id}
                 custom={direction}
@@ -224,26 +223,29 @@ export default function GalleryLightbox({ photos, initialIndex, onClose }: Galle
                 exit="exit"
                 transition={{
                   x: { type: 'spring', stiffness: 300, damping: 30 },
-                  opacity: { duration: 0.2 },
+                  opacity: { duration: 0.15 },
+                  scale: { duration: 0.3, ease: [0.25, 1, 0.5, 1] },
                 }}
+                style={{ willChange: 'transform, opacity' }}
                 drag={photos.length > 1 ? 'x' : false}
                 dragConstraints={{ left: 0, right: 0 }}
-                dragElastic={1}
+                dragElastic={0.8}
                 onDragEnd={handleDragEnd}
                 className="absolute inset-0 flex items-center justify-center p-4 md:p-16 lg:p-24"
               >
                 <div
-                  className="relative h-full w-full max-w-7xl"
-                  onClick={(event) => event.stopPropagation()}
+                  className="relative flex h-full w-full items-center justify-center"
+                  onClick={(e) => e.stopPropagation()}
                 >
                   <Image
                     src={currentPhoto.src}
                     alt={currentPhoto.category}
-                    fill
-                    sizes="100vw"
-                    quality={100}
+                    width={currentPhoto.width}
+                    height={currentPhoto.height}
+                    unoptimized
                     priority
-                    className="pointer-events-none object-contain select-none"
+                    decoding="async"
+                    className="pointer-events-none max-h-[85vh] w-auto max-w-full object-contain drop-shadow-2xl select-none"
                     draggable={false}
                   />
                 </div>

@@ -2,6 +2,7 @@ import 'server-only';
 
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { cache } from 'react';
 import sharp from 'sharp';
 
 import type { Category, GalleryPhoto } from '@/lib/categories';
@@ -53,7 +54,7 @@ async function processImage(
   }
 }
 
-export async function getGalleryPhotos(): Promise<GalleryPhoto[]> {
+export const getGalleryPhotos = cache(async (): Promise<GalleryPhoto[]> => {
   const galleryDir = path.join(process.cwd(), 'public', 'gallery');
   const allPhotos: GalleryPhoto[] = [];
 
@@ -83,4 +84,4 @@ export async function getGalleryPhotos(): Promise<GalleryPhoto[]> {
   }
 
   return allPhotos;
-}
+});

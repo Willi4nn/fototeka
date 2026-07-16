@@ -96,7 +96,7 @@ export default function Gallery({ photos }: GalleryProps) {
           ))}
         </div>
 
-        <div className="columns-1 gap-1 sm:columns-2 md:gap-2 lg:columns-3 xl:columns-4">
+        <div className="columns-1 gap-2 sm:columns-2 md:gap-2 lg:columns-3 xl:columns-4">
           {displayedPhotos.map((photo, index) => {
             const isInitialLoad = index < INITIAL_LIMIT;
 
@@ -105,22 +105,20 @@ export default function Gallery({ photos }: GalleryProps) {
                 key={photo.id}
                 type="button"
                 onClick={() => openLightbox(index)}
-                style={{ aspectRatio: `${photo.width} / ${photo.height}` }}
-                className="content-visibility-auto group relative mb-1 block w-full break-inside-avoid overflow-hidden bg-black/20 text-left md:mb-2"
+                className="group relative mb-2 block w-full break-inside-avoid overflow-hidden bg-black/20 text-left"
                 aria-label={`Ampliar foto: ${photo.category}`}
               >
                 <Image
                   src={photo.src}
                   alt={photo.category}
-                  fill
+                  width={photo.width}
+                  height={photo.height}
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
                   quality={75}
                   priority={isInitialLoad}
-                  fetchPriority={isInitialLoad ? 'high' : 'auto'}
-                  loading={isInitialLoad ? 'eager' : 'lazy'}
                   placeholder={isInitialLoad && photo.blurDataURL ? 'blur' : 'empty'}
                   blurDataURL={isInitialLoad ? photo.blurDataURL : undefined}
-                  className="object-cover transition-transform duration-500 ease-in-out will-change-transform motion-safe:group-hover:scale-110"
+                  className="h-auto w-full object-cover transition-transform duration-500 ease-in-out will-change-transform motion-safe:group-hover:scale-105"
                 />
 
                 <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-colors duration-300 group-hover:bg-black/40">
