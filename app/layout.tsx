@@ -96,6 +96,15 @@ export default function RootLayout({
       className={`${pestoMafio.variable} ${jost.variable} ${madelyn.variable} h-full antialiased`}
       suppressHydrationWarning
     >
+      <head>
+        <link
+          rel="preload"
+          as="image"
+          href="/hero/hero-poster.webp"
+          type="image/webp"
+          fetchPriority="high"
+        />
+      </head>
       <body
         className="bg-brand-beige text-brand-darkbrown flex min-h-full flex-col font-sans"
         suppressHydrationWarning

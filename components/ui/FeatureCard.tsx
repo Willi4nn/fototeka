@@ -61,6 +61,9 @@ export default function FeatureCard({
           alt={title}
           fill
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          quality={60}
+          loading="lazy"
+          decoding="async"
           suppressHydrationWarning
           className={`object-cover transition-transform duration-1000 ease-out group-hover:scale-110 ${
             hoverImage ? 'group-hover:opacity-0' : ''
@@ -73,6 +76,9 @@ export default function FeatureCard({
             aria-hidden="true"
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            quality={50}
+            loading="lazy"
+            decoding="async"
             suppressHydrationWarning
             className="scale-110 object-cover opacity-0 transition-opacity duration-1000 ease-out group-hover:opacity-100"
           />

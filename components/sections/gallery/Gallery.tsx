@@ -112,9 +112,11 @@ export default function Gallery({ photos }: GalleryProps) {
                   width={photo.width}
                   height={photo.height}
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
-                  quality={75}
+                  quality={50}
                   placeholder={photo.blurDataURL ? 'blur' : 'empty'}
                   blurDataURL={photo.blurDataURL}
+                  loading="lazy"
+                  decoding="async"
                   className="h-auto w-full object-cover transition-transform duration-700 ease-in-out will-change-transform motion-safe:group-hover:scale-[1.03]"
                 />
 

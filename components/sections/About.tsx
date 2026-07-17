@@ -203,7 +203,6 @@ export default function About() {
           </div>
         </div>
 
-        {/* Alterado para lg:grid-cols-3 para equilibrar perfeitamente os 6 itens */}
         <ul className="mx-auto mt-8 grid max-w-5xl grid-cols-2 gap-3 md:mt-12 md:grid-cols-3 md:gap-4 lg:grid-cols-3">
           {beneficios.map(({ icon: Icon, title, text }) => (
             <li
