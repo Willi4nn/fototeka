@@ -7,7 +7,7 @@ import Button from '@/components/ui/Button';
 import SectionHeader from './SectionHeader';
 
 const inputClass =
-  'w-full border border-brand-darkbrown/50 bg-brand-beige/20 px-4 py-2.5 font-sans text-[14px] text-brand-darkbrown outline-none transition-all duration-300 placeholder:text-brand-darkbrown/50 hover:border-brand-terracotta/50 focus:border-brand-terracotta focus:bg-white focus:ring-2 focus:ring-brand-terracotta/20';
+  'w-full min-w-0 appearance-none rounded-none border border-brand-darkbrown/50 bg-brand-beige/20 px-4 py-2.5 font-sans text-[14px] text-brand-darkbrown outline-none transition-all duration-300 placeholder:text-brand-darkbrown/50 hover:border-brand-terracotta/50 focus:border-brand-terracotta focus:bg-white focus:ring-2 focus:ring-brand-terracotta/20';
 const labelClass =
   'mb-1.5 ml-1 block font-sans text-[10px] font-bold uppercase tracking-widest text-brand-darkbrown/60';
 const selectIcon = (
@@ -87,6 +87,7 @@ export default function Contact() {
           id="hidden_iframe"
           style={{ display: 'none' }}
           onLoad={handleIframeLoad}
+          suppressHydrationWarning
         ></iframe>
 
         <div className="shadow-brand-darkbrown/10 relative mx-auto bg-white p-6 shadow-xl sm:p-8 md:p-10">
@@ -135,7 +136,7 @@ export default function Contact() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0, filter: 'blur(4px)' }}
-                className="grid gap-x-4 gap-y-4 md:grid-cols-12"
+                className="grid grid-cols-1 gap-4 md:grid-cols-12"
                 suppressHydrationWarning
               >
                 <input type="hidden" name="fcelular" value={phone} suppressHydrationWarning />
@@ -205,7 +206,7 @@ export default function Contact() {
                       required
                       name="ftipo"
                       defaultValue=""
-                      className={`${inputClass} cursor-pointer appearance-none pr-10`}
+                      className={`${inputClass} cursor-pointer pr-10`}
                       suppressHydrationWarning
                     >
                       <option value="" disabled hidden>
@@ -238,7 +239,7 @@ export default function Contact() {
                       required
                       name="fconheceu2"
                       defaultValue=""
-                      className={`${inputClass} cursor-pointer appearance-none pr-10`}
+                      className={`${inputClass} cursor-pointer pr-10`}
                       suppressHydrationWarning
                     >
                       <option value="" disabled hidden>

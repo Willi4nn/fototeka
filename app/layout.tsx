@@ -32,6 +32,11 @@ export const metadata: Metadata = {
     default: 'Foto Teka | Locações e Serviços LTDA',
     template: '%s | Foto Teka',
   },
+  applicationName: 'Foto Teka',
+  appleWebApp: {
+    title: 'Foto Teka',
+    statusBarStyle: 'default',
+  },
   description:
     'Mais do que registrar imagens, a Foto Teka cria experiências. Aluguel de Totem Retrô, Espelho Mágico e Plataforma 360 para eventos em Patos de Minas e região.',
   keywords: [
