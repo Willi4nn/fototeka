@@ -79,12 +79,7 @@ export default function Contact() {
 
   return (
     <section id="contact" className="bg-brand-beige relative z-10 w-full overflow-hidden py-16">
-      <SectionHeader
-        subtitle="Vamos Conversar"
-        subtitleClassName="mb-2 text-3xl md:text-4xl"
-        title="Solicite seu Orçamento."
-        titleClassName="mb-4 text-2xl md:mb-5 md:text-[2.5rem] md:leading-tight"
-      />
+      <SectionHeader subtitle="Vamos Conversar" title="Solicite seu Orçamento." />
 
       <div className="relative mx-auto max-w-3xl px-6 md:px-8">
         <iframe
@@ -141,11 +136,17 @@ export default function Contact() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0, filter: 'blur(4px)' }}
                 className="grid gap-x-4 gap-y-4 md:grid-cols-12"
+                suppressHydrationWarning
               >
-                <input type="hidden" name="fcelular" value={phone} />
-                <input type="hidden" name="full_fcelular" value={`+55${phone}`} />
-                <input type="hidden" name="fcomo" value={method} />
-                <input type="hidden" name="fid" value="" />
+                <input type="hidden" name="fcelular" value={phone} suppressHydrationWarning />
+                <input
+                  type="hidden"
+                  name="full_fcelular"
+                  value={`+55${phone}`}
+                  suppressHydrationWarning
+                />
+                <input type="hidden" name="fcomo" value={method} suppressHydrationWarning />
+                <input type="hidden" name="fid" value="" suppressHydrationWarning />
 
                 <div className="md:col-span-6">
                   <label className={labelClass}>Nome Completo</label>
@@ -155,6 +156,7 @@ export default function Contact() {
                     type="text"
                     placeholder="Como te chamamos?"
                     className={inputClass}
+                    suppressHydrationWarning
                   />
                 </div>
                 <div className="md:col-span-6">
@@ -165,12 +167,12 @@ export default function Contact() {
                     type="email"
                     placeholder="seu@melhoremail.com"
                     className={inputClass}
+                    suppressHydrationWarning
                   />
                 </div>
 
                 <div className="md:col-span-4">
                   <label className={labelClass}>WhatsApp</label>
-
                   <input
                     required
                     type="tel"
@@ -178,15 +180,22 @@ export default function Contact() {
                     value={formatPhone(phone)}
                     onChange={handlePhone}
                     className={inputClass}
+                    suppressHydrationWarning
                   />
                 </div>
                 <div className="md:col-span-4">
                   <label className={labelClass}>Data do Evento</label>
-                  <input required name="fdata" type="date" className={inputClass} />
+                  <input
+                    required
+                    name="fdata"
+                    type="date"
+                    className={inputClass}
+                    suppressHydrationWarning
+                  />
                 </div>
                 <div className="md:col-span-4">
                   <label className={labelClass}>Início (Hora)</label>
-                  <input name="fhora" type="time" className={inputClass} />
+                  <input name="fhora" type="time" className={inputClass} suppressHydrationWarning />
                 </div>
 
                 <div className="md:col-span-6">
@@ -197,6 +206,7 @@ export default function Contact() {
                       name="ftipo"
                       defaultValue=""
                       className={`${inputClass} cursor-pointer appearance-none pr-10`}
+                      suppressHydrationWarning
                     >
                       <option value="" disabled hidden>
                         Selecione...
@@ -217,6 +227,7 @@ export default function Contact() {
                     type="text"
                     placeholder="Nome do salão ou cidade"
                     className={inputClass}
+                    suppressHydrationWarning
                   />
                 </div>
 
@@ -228,6 +239,7 @@ export default function Contact() {
                       name="fconheceu2"
                       defaultValue=""
                       className={`${inputClass} cursor-pointer appearance-none pr-10`}
+                      suppressHydrationWarning
                     >
                       <option value="" disabled hidden>
                         Conta pra gente...

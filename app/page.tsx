@@ -16,7 +16,7 @@ export default function Home() {
     name: 'Foto Teka',
     image: 'https://www.fototeka.com.br/logos/logo-foto-teka.svg',
     description:
-      'Mais do que registrar imagens, a Foto Teka cria experiências. Aluguel de Totem Retrô, Espelho Mágico e Plataforma 360.',
+      'Mais do que registrar imagens, a Foto Teka cria experiências. Aluguel de Totem Retrô, Espelho Mágico e Plataforma 360 para eventos.',
     '@id': 'https://www.fototeka.com.br',
     url: 'https://www.fototeka.com.br',
     telephone: '+5534996532257',
@@ -32,6 +32,30 @@ export default function Home() {
       longitude: -46.5181,
     },
     priceRange: '$$',
+    sameAs: ['https://instagram.com/fototekah'],
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Serviços de Fotografia e Lembranças',
+      itemListElement: [
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Aluguel de Plataforma 360',
+            description:
+              'Vídeos 360° em slow motion para casamentos e aniversários em Patos de Minas.',
+          },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Aluguel de Totem Retrô e Espelho Mágico',
+            description: 'Cabine de fotos e impressão térmica na hora para eventos.',
+          },
+        },
+      ],
+    },
   };
 
   return (

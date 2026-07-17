@@ -25,6 +25,26 @@ const FOCUS_IN: Variants = {
   },
 };
 
+function FilmDivider() {
+  return (
+    <div
+      aria-hidden="true"
+      className="mx-auto my-16 flex w-full max-w-xs items-center justify-center gap-3 md:max-w-sm"
+    >
+      <span className="bg-brand-darkbrown/15 h-0.5 flex-1" />
+      <div className="flex gap-2">
+        {Array.from({ length: 6 }).map((_, i) => (
+          <span
+            key={i}
+            className="border-brand-darkbrown/30 size-2.5 rounded-sm border-[1.5px] bg-transparent"
+          />
+        ))}
+      </div>
+      <span className="bg-brand-darkbrown/15 h-0.5 flex-1" />
+    </div>
+  );
+}
+
 export default function Services() {
   const reduceMotion = useReducedMotion();
 
@@ -43,7 +63,10 @@ export default function Services() {
   };
 
   return (
-    <section id="services" className="bg-brand-beige relative z-10 w-full overflow-hidden py-16">
+    <section
+      id="services"
+      className="bg-brand-beige relative z-10 w-full overflow-hidden py-16 md:py-24"
+    >
       <motion.div
         aria-hidden="true"
         className="pointer-events-none absolute top-20 -left-20 z-0 md:top-1/3 md:-left-10"
@@ -62,36 +85,44 @@ export default function Services() {
             width={500}
             height={500}
             priority
-            className="h-auto w-auto md:w-150"
+            className="h-auto w-auto opacity-80 md:w-150"
           />
         </motion.div>
       </motion.div>
 
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 md:px-8">
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-5 md:px-8">
         <motion.div {...headerAnimProps}>
           <SectionHeader
             subtitle="Nossos Serviços"
-            subtitleClassName="mb-2 text-3xl md:text-4xl"
             title="EQUIPAMENTOS QUE TRANSFORMAM SEU EVENTO."
-            titleClassName="mb-4 text-2xl md:mb-5 md:text-[2.5rem] md:leading-tight"
           />
         </motion.div>
 
-        <motion.ul {...listAnimProps} className="grid grid-cols-2 gap-4 md:grid-cols-3">
+        <motion.ul
+          {...listAnimProps}
+          className="mx-auto flex max-w-6xl flex-wrap justify-center gap-6 lg:gap-8"
+        >
           {EQUIPMENT.map((item, index) => (
-            <FeatureCard key={index} index={index} {...item} />
+            <div key={index} className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-22px)]">
+              <FeatureCard index={index} {...item} />
+            </div>
           ))}
         </motion.ul>
 
-        <div className="mt-16" />
+        <FilmDivider />
 
         <motion.div {...headerAnimProps}>
           <SectionHeader title="ADICIONAIS EXCLUSIVOS" titleClassName="text-brand-darkbrown" />
         </motion.div>
 
-        <motion.ul {...listAnimProps} className="grid grid-cols-2 gap-4 md:grid-cols-3">
+        <motion.ul
+          {...listAnimProps}
+          className="mx-auto flex max-w-6xl flex-wrap justify-center gap-6 lg:gap-8"
+        >
           {ADDITIONALS.map((item, index) => (
-            <FeatureCard key={index} index={index} {...item} />
+            <div key={index} className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-22px)]">
+              <FeatureCard index={index} {...item} />
+            </div>
           ))}
         </motion.ul>
       </div>

@@ -40,6 +40,15 @@ async function processImage(
 
     const blurDataURL = `data:image/webp;base64,${blurBuffer.toString('base64')}`;
 
+    const seoKeywords = [
+      'Totem fotográfico Patos de Minas',
+      'Lembrancinha de evento',
+      'Plataforma 360',
+      'Espelho Mágico',
+    ];
+
+    const dynamicAlt = `Foto de ${category.toLowerCase()} com ${seoKeywords[Math.floor(Math.random() * seoKeywords.length)]} - ${file.replace(/\.[^/.]+$/, '')}`;
+
     return {
       id: `${folder}/${file}`,
       src: `/gallery/${folder}/${file}`,
@@ -47,6 +56,7 @@ async function processImage(
       width: metadata.width,
       height: metadata.height,
       blurDataURL,
+      alt: dynamicAlt,
     };
   } catch (error) {
     console.warn(`[gallery] failed to process ${filePath}:`, error);

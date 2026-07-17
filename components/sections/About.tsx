@@ -90,7 +90,7 @@ export default function About() {
       <div className="relative z-10 mx-auto w-full max-w-7xl px-6 md:px-8 lg:px-12">
         <div className="grid grid-cols-1 items-center lg:grid-cols-[1fr_1.1fr] lg:gap-8">
           <div className="mx-auto max-w-120 lg:mx-0">
-            <p className="text-brand-terracotta mb-1 text-center font-(family-name:--font-parisienne) text-4xl md:text-5xl lg:text-left">
+            <p className="text-brand-terracotta font-madelyn mb-1 text-center text-5xl md:text-6xl lg:text-left">
               Nosso Propósito
             </p>
 
@@ -122,7 +122,7 @@ export default function About() {
                   'pointer-events-none absolute inset-0 z-50 rounded-sm bg-white transition-opacity',
                   isFlashing
                     ? 'opacity-100 duration-75 ease-in'
-                    : 'opacity-0 duration-700 ease-out',
+                    : 'opacity-0 duration-2000 ease-out',
                 )}
               />
 
@@ -168,7 +168,7 @@ export default function About() {
                   'pointer-events-none absolute inset-0 z-50 rounded-sm bg-white transition-opacity',
                   isFlashing
                     ? 'opacity-100 duration-75 ease-in'
-                    : 'opacity-0 duration-700 ease-out',
+                    : 'opacity-0 duration-2000 ease-out',
                 )}
               />
 

@@ -22,7 +22,7 @@ export default function SectionHeader({
       {subtitle && (
         <p
           className={cn(
-            'text-brand-terracotta mb-1 font-(family-name:--font-parisienne) text-4xl md:text-5xl',
+            'text-brand-terracotta font-madelyn mb-1 text-5xl md:text-6xl',
             subtitleClassName,
           )}
         >
@@ -32,7 +32,7 @@ export default function SectionHeader({
 
       <h2
         className={cn(
-          'mb-3 font-sans text-xl font-black tracking-wide uppercase md:mb-4 md:text-3xl',
+          'mb-3 font-sans font-black tracking-wide uppercase md:mb-4 md:text-3xl md:text-[2.5rem] md:leading-tight',
           titleClassName,
         )}
       >

@@ -9,6 +9,7 @@
 
   /* Tipografia */
   --font-pesto: var(--font-pesto), sans-serif;
+  --font-madelyn: var(--font-madelyn), cursive;
   --font-sans: var(--font-jost), Arial, sans-serif;
 }
 
@@ -30,6 +31,10 @@ button {
 
 @utility font-pesto {
   font-family: var(--font-pesto);
+}
+
+@utility font-madelyn {
+  font-family: var(--font-madelyn);
 }
 
 @utility content-visibility-auto {

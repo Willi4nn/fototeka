@@ -15,4 +15,5 @@ export type GalleryPhoto = {
   width: number;
   height: number;
   blurDataURL?: string;
+  alt: string;
 };

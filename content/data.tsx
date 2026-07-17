@@ -2,13 +2,13 @@ import {
   Camera,
   Layers3,
   Lightbulb,
-  MapPin,
+  Palette,
   Pencil,
+  Pointer,
+  Printer,
   QrCode,
-  Share2,
   Signature,
   Star,
-  Sun,
   Users,
   Video,
 } from 'lucide-react';
@@ -42,10 +42,12 @@ export const EQUIPMENT = [
     description:
       'Design clássico em madeira maciça com iluminação profissional para fotos com charme atemporal.',
     image: '/services/totem-retro.webp',
+    hoverImage: '/services/totem-retro-2.webp',
     features: [
-      { icon: Camera, text: 'CÂMERA DSLR PROFISSIONAL' },
-      { icon: Layers3, text: 'IMPRESSÃO TÉRMICA RÁPIDA' },
-      { icon: Lightbulb, text: 'ILUMINAÇÃO BEAUTY DISH' },
+      { icon: Camera, text: 'CÂMERA PROFISSIONAL DSLR' },
+      { icon: Pointer, text: 'TELA TOUCH' },
+      { icon: Printer, text: 'IMPRESSORA TÉRMICA' },
+      { icon: Lightbulb, text: 'LUZ DE ESTÚDIO' },
     ],
   },
   {
@@ -53,10 +55,11 @@ export const EQUIPMENT = [
     description:
       'Vintage e moderno. O espelho que decora o seu espaço e eterniza os seus melhores momentos.',
     image: '/services/espelho-retro.webp',
+    hoverImage: '/services/espelho-retro-2.webp',
     features: [
-      { icon: MapPin, text: 'TELA TOUCH INTERATIVA' },
-      { icon: Sun, text: 'ILUMINAÇÃO EM LED' },
-      { icon: Camera, text: 'FOTOS EM ALTA RESOLUÇÃO' },
+      { icon: Camera, text: 'CÂMERA PROFISSIONAL DSLR' },
+      { icon: Printer, text: 'IMPRESSORA TÉRMICA' },
+      { icon: Lightbulb, text: 'LUZ DE ESTÚDIO' },
     ],
   },
   {
@@ -64,10 +67,12 @@ export const EQUIPMENT = [
     description:
       'Elegância que encanta, o espelho mágico traz sofisticação e muita interatividade.',
     image: '/services/espelho-magico.webp',
+    hoverImage: '/services/espelho-magico-2.webp',
     features: [
-      { icon: Star, text: 'ANIMAÇÕES PERSONALIZADAS' },
-      { icon: Signature, text: 'ASSINATURA DIGITAL' },
-      { icon: Share2, text: 'COMPARTILHAMENTO ONLINE' },
+      { icon: Pointer, text: 'TELA TOUCH INTERATIVA' },
+      { icon: Camera, text: 'CÂMERA DSLR' },
+      { icon: Printer, text: 'IMPRESSORA TÉRMICA' },
+      { icon: Lightbulb, text: 'LUZ DE ESTÚDIO' },
     ],
   },
   {
@@ -75,6 +80,7 @@ export const EQUIPMENT = [
     description:
       'Vídeos incríveis em slow motion com movimentos aéreos e iluminação sincronizada. Impacto garantido!',
     image: '/services/360.webp',
+    //hoverImage: '/services/360-2.webp',
     features: [
       { icon: Video, text: 'VÍDEOS 360° SLOW MOTION' },
       { icon: Layers3, text: 'ESTRUTURA EM ALUMÍNIO' },
@@ -86,6 +92,7 @@ export const EQUIPMENT = [
     description:
       'As lembranças ganham voz e uma linda assinatura. A interação de vídeo perfeita para seus convidados.',
     image: '/services/autografo.webp',
+    //hoverImage: '/services/autografo-2.webp',
     features: [
       { icon: Users, text: 'TELA TOUCH INTERATIVA' },
       { icon: Pencil, text: 'DESENHOS E MENSAGENS' },
@@ -99,6 +106,7 @@ export const ADDITIONALS = [
     title: 'Guestbook',
     description: 'Álbum de memórias personalizado com fotos e mensagens dos convidados.',
     image: '/services/guestbook.webp',
+    hoverImage: '/services/guestbook-2.webp',
     features: [
       { icon: Layers3, text: 'CAPA EM MADEIRA OU COURO' },
       { icon: Camera, text: 'FOTOS COLADAS NA HORA' },
@@ -109,7 +117,8 @@ export const ADDITIONALS = [
     title: 'Chaveiros',
     description:
       'Artesanal e personalizado. O chaveiro é feito com couro sintético, é leve, resistente e com aquele toque único.',
-    image: '/services/chaveiros.webp',
+    image: '/services/chaveiro.webp',
+    hoverImage: '/services/chaveiro-2.webp',
     features: [
       { icon: Layers3, text: 'COURO SINTÉTICO' },
       { icon: Star, text: 'LEVE E RESISTENTE' },
@@ -121,6 +130,7 @@ export const ADDITIONALS = [
     description:
       'Uma lembrança que te encontra todo dia. Sua foto com o destaque que merece no lugar mais visitado da casa.',
     image: '/services/ima-geladeira.webp',
+    //hoverImage: '/services/ima-geladeira-2.webp',
     features: [
       { icon: Camera, text: 'ACABAMENTO PREMIUM' },
       { icon: Layers3, text: 'FIXAÇÃO MAGNÉTICA' },
@@ -131,37 +141,47 @@ export const ADDITIONALS = [
     title: 'Fundo Fotográfico',
     description: 'O detalhe que transforma. Fundo liso, foto marcante. Impacto no primeiro clique.',
     image: '/services/fundo.webp',
+    //hoverImage: '/services/fundo-2.webp',
     features: [
       { icon: Layers3, text: 'FUNDO LISO' },
       { icon: Camera, text: 'FOTO MARCANTE' },
       { icon: Star, text: 'IMPACTO VISUAL' },
+      { icon: Palette, text: 'LAYOUT PERSONALIZADO' },
     ],
   },
 ] as const;
 
 export const TESTIMONIALS = [
   {
-    name: 'Aline Oliveira',
-    text: 'Fotos impressas na hora, com qualidade profissional. Cada clique virou uma memória que nunca mais se apaga. Como vale a pena contratar a Fototeka. 🥰',
+    name: 'Eveny Daniele',
+    text: 'Agradeço imensamente à Tekka pelo trabalho impecável em nosso casamento! Ela foi a sensação da festa! Todos os convidados amaram, se divertiram e deram muitas risadas. É nítido o amor que ela coloca no que faz. Recomendamos de olhos fechados!',
+  },
+  {
+    name: 'Amanda Caroline',
+    text: 'Trabalho de qualidade, excelência, profissionalismo e com um carisma incrível! Vocês terão uma experiência inesquecível com muitas recordações lindas. A Fototeka esteve no aniversário da minha sobrinha e foi perfeito.',
   },
   {
     name: 'Cecilia Oliveira',
     text: 'Simplesmente apaixonada pelas fotos! Equipamentos maravilhosos, equipe atenciosa e uma ótima recordação para levar para casa. Recomendo de olhos fechados!',
   },
   {
-    name: 'Eveny Daniele',
-    text: 'A Tekka foi a sensação do nosso casamento! Os convidados amaram e os chaveirinhos fizeram o maior sucesso. Atendimento maravilhoso do início ao fim com muita simpatia. Recomendamos muito!',
-  },
-  {
-    name: 'Amanda Caroline',
-    text: 'Trabalho de excelência e com um carisma incrível! A Fototeka esteve no aniversário de 15 anos da minha sobrinha e foi perfeito. Terão uma experiência inesquecível!',
+    name: 'Aline Oliveira',
+    text: 'Fotos impressas na hora, com qualidade profissional. Cada clique virou uma memória que nunca mais se apaga. Como vale a pena contratar a Fototeka. 🥰',
   },
   {
     name: '@kamilamfreitag',
-    text: 'Amei demais vcs aqui!! Foi sensacional!!! Obrigada por tudo... você é um amor de pessoa!! Super indico ❤️❤️',
+    text: 'Amei demais vcs aqui!! Foi sensacional !!! Obrigada por tudo... você é um amor de pessoa!! Super indico ❤️❤️',
   },
   {
     name: '@alvinadornelashordones',
-    text: 'E o seu trabalho impecável! Que álbum lindo, tudo perfeito 😍 Valeu muito a pena ter contratado vocês, todo mundo adorou!',
+    text: 'E o seu trabalho impecável. Que álbum lindo, tudo perfeito 😍 Valeu muito a pena ter contratado vocês!',
+  },
+  {
+    name: '@fernandableal',
+    text: 'Foi incrível ter a Fototekah na festa, os convidados amaram! Muito lindo, vai ficar marcado na memória pra sempre. 🤍',
+  },
+  {
+    name: '@dra_anaclarafernandes',
+    text: 'Aaaa que vídeo lindoo... você tornou esse momento mais que especial 😍 Obrigada por deixar nossa festa ainda mais incrível!',
   },
 ] as const;

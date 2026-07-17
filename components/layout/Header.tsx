@@ -39,7 +39,7 @@ export default function Header() {
         isScrolled ? 'bg-black/80 py-3 backdrop-blur-md' : 'bg-transparent py-5',
       )}
     >
-      <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-4 md:px-4 lg:px-8">
+      <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-6 md:px-8 lg:px-12">
         <Link href="/" className="flex shrink-0 items-center">
           <Image
             src="/logos/logo-foto-teka.svg"
@@ -51,7 +51,6 @@ export default function Header() {
           />
         </Link>
 
-        {/* Mudado de md:flex para lg:flex */}
         <nav className="text-md hidden items-center gap-5 font-sans tracking-wide lg:flex lg:gap-8">
           {HEADER_LINKS.map((link) => (
             <Link
@@ -65,14 +64,12 @@ export default function Header() {
           ))}
         </nav>
 
-        {/* Mudado de md:block para lg:block */}
         <div className="hidden shrink-0 lg:block">
           <Button href="#contact" variant="primary" size="header">
             Solicitar Orçamento
           </Button>
         </div>
 
-        {/* Mudado de md:hidden para lg:hidden */}
         <button
           className="shrink-0 text-white lg:hidden"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -92,7 +89,6 @@ export default function Header() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            // Mudado de md:hidden para lg:hidden
             className="absolute top-full left-0 flex w-full flex-col items-center gap-6 border-t border-white/10 bg-black/95 py-8 backdrop-blur-xl lg:hidden"
           >
             {HEADER_LINKS.map((link) => (

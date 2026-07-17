@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Jost, Parisienne } from 'next/font/google';
+import { Jost } from 'next/font/google';
 import localFont from 'next/font/local';
 
 import WhatsAppButton from '@/components/layout/WhatsAppButton';
@@ -12,16 +12,15 @@ const pestoMafio = localFont({
   display: 'swap',
 });
 
-const jost = Jost({
-  subsets: ['latin'],
-  variable: '--font-jost',
+const madelyn = localFont({
+  src: '../public/fonts/Madelyn_Regular.woff2',
+  variable: '--font-madelyn',
   display: 'swap',
 });
 
-const parisienne = Parisienne({
-  weight: '400',
+const jost = Jost({
   subsets: ['latin'],
-  variable: '--font-parisienne',
+  variable: '--font-jost',
   display: 'swap',
 });
 
@@ -94,9 +93,13 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`${pestoMafio.variable} ${jost.variable} ${parisienne.variable} h-full antialiased`}
+      className={`${pestoMafio.variable} ${jost.variable} ${madelyn.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className="bg-brand-beige text-brand-darkbrown flex min-h-full flex-col font-sans">
+      <body
+        className="bg-brand-beige text-brand-darkbrown flex min-h-full flex-col font-sans"
+        suppressHydrationWarning
+      >
         {children}
         <WhatsAppButton />
       </body>

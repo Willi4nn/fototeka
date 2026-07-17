@@ -146,7 +146,7 @@ export default function GalleryLightbox({ photos, initialIndex, onClose }: Galle
               aria-hidden="true"
               className="pointer-events-none absolute -z-50 h-px w-px overflow-hidden opacity-0"
             >
-              {[-2, -1, 1, 2, 3].map((offset) => {
+              {[-1, 1].map((offset) => {
                 const preIndex = (index + offset + photos.length) % photos.length;
                 const photo = photos[preIndex];
 
@@ -158,7 +158,8 @@ export default function GalleryLightbox({ photos, initialIndex, onClose }: Galle
                     src={photo.src}
                     width={photo.width}
                     height={photo.height}
-                    unoptimized
+                    sizes="(max-width: 768px) 100vw, 1600px"
+                    quality={85}
                     loading="eager"
                     decoding="async"
                     alt=""
@@ -242,7 +243,8 @@ export default function GalleryLightbox({ photos, initialIndex, onClose }: Galle
                     alt={currentPhoto.category}
                     width={currentPhoto.width}
                     height={currentPhoto.height}
-                    unoptimized
+                    sizes="(max-width: 768px) 100vw, 1600px"
+                    quality={85}
                     priority
                     decoding="async"
                     className="pointer-events-none max-h-[85vh] w-auto max-w-full object-contain drop-shadow-2xl select-none"

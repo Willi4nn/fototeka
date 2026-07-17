@@ -19,7 +19,7 @@ const WATERMARKS = [
   'right-1/4 top-1/2 size-[16rem] -translate-y-1/2 rotate-4 opacity-10',
 ] as const;
 
-const INITIAL_LIMIT = 12;
+const INITIAL_LIMIT = 8;
 
 type GalleryProps = {
   photos: GalleryPhoto[];
@@ -75,12 +75,12 @@ export default function Gallery({ photos }: GalleryProps) {
         />
       ))}
 
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 md:px-8 lg:px-12">
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 md:px-8 lg:px-12">
         <SectionHeader
           subtitle="Galeria de Momentos"
-          subtitleClassName="mb-2 text-3xl text-brand-beige md:text-4xl"
+          subtitleClassName="text-brand-beige"
           title="CADA EVENTO, UMA HISTÓRIA ÚNICA."
-          titleClassName="mb-4 text-2xl text-white md:mb-5 md:text-[2.5rem] md:leading-tight"
+          titleClassName="text-white"
         />
 
         <div className="mx-auto mb-10 flex max-w-4xl flex-wrap items-center justify-center gap-2 md:mb-12 md:gap-3">
@@ -96,16 +96,14 @@ export default function Gallery({ photos }: GalleryProps) {
           ))}
         </div>
 
-        <div className="columns-1 gap-2 sm:columns-2 md:gap-2 lg:columns-3 xl:columns-4">
+        <div className="mx-auto w-full max-w-6xl columns-1 gap-4 sm:columns-2 lg:columns-3 xl:columns-4">
           {displayedPhotos.map((photo, index) => {
-            const isInitialLoad = index < INITIAL_LIMIT;
-
             return (
               <button
                 key={photo.id}
                 type="button"
                 onClick={() => openLightbox(index)}
-                className="group relative mb-2 block w-full break-inside-avoid overflow-hidden bg-black/20 text-left"
+                className="group relative mb-4 block w-full break-inside-avoid overflow-hidden bg-black/20 text-left shadow-lg ring-1 ring-white/10 transition-shadow hover:shadow-xl"
                 aria-label={`Ampliar foto: ${photo.category}`}
               >
                 <Image
@@ -115,13 +113,12 @@ export default function Gallery({ photos }: GalleryProps) {
                   height={photo.height}
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
                   quality={75}
-                  priority={isInitialLoad}
-                  placeholder={isInitialLoad && photo.blurDataURL ? 'blur' : 'empty'}
-                  blurDataURL={isInitialLoad ? photo.blurDataURL : undefined}
-                  className="h-auto w-full object-cover transition-transform duration-500 ease-in-out will-change-transform motion-safe:group-hover:scale-105"
+                  placeholder={photo.blurDataURL ? 'blur' : 'empty'}
+                  blurDataURL={photo.blurDataURL}
+                  className="h-auto w-full object-cover transition-transform duration-700 ease-in-out will-change-transform motion-safe:group-hover:scale-[1.03]"
                 />
 
-                <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-colors duration-300 group-hover:bg-black/40">
+                <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-colors duration-300 group-hover:bg-black/30">
                   <span className="translate-y-4 font-sans text-xs font-bold tracking-widest text-white uppercase opacity-0 transition-all duration-300 group-hover:opacity-100 motion-safe:group-hover:translate-y-0">
                     Ampliar
                   </span>

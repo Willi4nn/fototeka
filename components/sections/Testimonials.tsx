@@ -43,9 +43,9 @@ export default function Testimonials() {
         <SectionHeader
           className="mb-10"
           subtitle="Depoimentos"
-          subtitleClassName="mb-2 text-3xl text-brand-beige/90 md:text-4xl"
+          subtitleClassName="text-brand-beige/90"
           title="QUEM VIVE, RECOMENDA!"
-          titleClassName="mb-4 text-2xl text-white md:mb-5 md:text-[2.5rem] md:leading-tight"
+          titleClassName="text-white"
           dividerClassName="bg-brand-terracotta"
         />
 
@@ -84,7 +84,7 @@ export default function Testimonials() {
                   </p>
 
                   <div className="border-brand-midbrown/20 flex w-full flex-col items-end border-t pt-4">
-                    <span className="text-brand-terracotta font-(family-name:--font-parisienne) text-2xl md:text-3xl">
+                    <span className="text-brand-terracotta font-madelyn text-2xl md:text-3xl">
                       {testimonial.name}
                     </span>
                   </div>
