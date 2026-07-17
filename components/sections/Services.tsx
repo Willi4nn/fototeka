@@ -90,7 +90,7 @@ export default function Services() {
         </motion.div>
       </motion.div>
 
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-5 md:px-8">
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 md:px-8 lg:px-12">
         <motion.div {...headerAnimProps}>
           <SectionHeader
             subtitle="Nossos Serviços"
@@ -100,7 +100,7 @@ export default function Services() {
 
         <motion.ul
           {...listAnimProps}
-          className="mx-auto flex max-w-6xl flex-wrap justify-center gap-6 lg:gap-8"
+          className="mx-auto flex flex-wrap justify-center gap-6 lg:gap-8"
         >
           {EQUIPMENT.map((item, index) => (
             <div key={index} className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-22px)]">
@@ -117,7 +117,7 @@ export default function Services() {
 
         <motion.ul
           {...listAnimProps}
-          className="mx-auto flex max-w-6xl flex-wrap justify-center gap-6 lg:gap-8"
+          className="mx-auto flex flex-wrap justify-center gap-6 lg:gap-8"
         >
           {ADDITIONALS.map((item, index) => (
             <div key={index} className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-22px)]">

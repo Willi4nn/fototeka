@@ -80,7 +80,7 @@ export const EQUIPMENT = [
     description:
       'Vídeos incríveis em slow motion com movimentos aéreos e iluminação sincronizada. Impacto garantido!',
     image: '/services/360.webp',
-    //hoverImage: '/services/360-2.webp',
+    hoverImage: '/services/360-2.webp',
     features: [
       { icon: Video, text: 'VÍDEOS 360° SLOW MOTION' },
       { icon: Layers3, text: 'ESTRUTURA EM ALUMÍNIO' },
@@ -108,7 +108,7 @@ export const ADDITIONALS = [
     image: '/services/guestbook.webp',
     hoverImage: '/services/guestbook-2.webp',
     features: [
-      { icon: Layers3, text: 'CAPA EM MADEIRA OU COURO' },
+      { icon: Layers3, text: 'CAPA DURA' },
       { icon: Camera, text: 'FOTOS COLADAS NA HORA' },
       { icon: Pencil, text: 'MENSAGENS PERSONALIZADAS' },
     ],
@@ -141,7 +141,7 @@ export const ADDITIONALS = [
     title: 'Fundo Fotográfico',
     description: 'O detalhe que transforma. Fundo liso, foto marcante. Impacto no primeiro clique.',
     image: '/services/fundo.webp',
-    //hoverImage: '/services/fundo-2.webp',
+    hoverImage: '/services/fundo-2.webp',
     features: [
       { icon: Layers3, text: 'FUNDO LISO' },
       { icon: Camera, text: 'FOTO MARCANTE' },

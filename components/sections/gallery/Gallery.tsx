@@ -96,7 +96,7 @@ export default function Gallery({ photos }: GalleryProps) {
           ))}
         </div>
 
-        <div className="mx-auto w-full max-w-6xl columns-1 gap-4 sm:columns-2 lg:columns-3 xl:columns-4">
+        <div className="mx-auto w-full max-w-7xl columns-1 gap-4 sm:columns-2 lg:columns-3 xl:columns-4">
           {displayedPhotos.map((photo, index) => {
             return (
               <button

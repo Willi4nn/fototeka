@@ -1,7 +1,7 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { Camera, Glasses, Images, Infinity as InfinityIcon, Users } from 'lucide-react';
+import { Camera, Glasses, Images, Infinity as InfinityIcon, Palette, Users } from 'lucide-react';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
@@ -26,7 +26,16 @@ const beneficios = [
     title: 'Variedade de Impressos',
     text: 'Variedade de impressos: Tirinha, Polaroide e Tradicional.',
   },
-  { icon: Camera, title: 'Fotos Digitais', text: 'Fotos digitais entregues em alta qualidade.' },
+  {
+    icon: Camera,
+    title: 'Fotos Digitais',
+    text: 'Fotos digitais entregues em alta qualidade.',
+  },
+  {
+    icon: Palette,
+    title: 'Layout Personalizado',
+    text: 'Cada impressão com sua identidade visual.',
+  },
 ] as const;
 
 const polaroidSlides = [
@@ -194,7 +203,8 @@ export default function About() {
           </div>
         </div>
 
-        <ul className="mx-auto mt-8 grid max-w-275 grid-cols-2 gap-3 md:mt-12 md:grid-cols-3 md:gap-4 lg:grid-cols-5">
+        {/* Alterado para lg:grid-cols-3 para equilibrar perfeitamente os 6 itens */}
+        <ul className="mx-auto mt-8 grid max-w-5xl grid-cols-2 gap-3 md:mt-12 md:grid-cols-3 md:gap-4 lg:grid-cols-3">
           {beneficios.map(({ icon: Icon, title, text }) => (
             <li
               key={title}
