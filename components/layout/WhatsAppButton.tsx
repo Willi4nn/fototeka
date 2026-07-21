@@ -1,6 +1,6 @@
 'use client';
 
-import { WhatsappIcon } from '@/content/data';
+import { WhatsappIcon } from '@/components/ui/Icons';
 import { WHATSAPP_URL } from '@/lib/site';
 
 export default function WhatsAppButton() {

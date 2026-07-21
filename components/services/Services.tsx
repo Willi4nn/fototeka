@@ -3,9 +3,9 @@
 import { motion, useReducedMotion, type Variants } from 'framer-motion';
 import Image from 'next/image';
 
-import { ADDITIONALS, EQUIPMENT } from '@/content/data';
 import FeatureCard from '../ui/FeatureCard';
-import SectionHeader from './SectionHeader';
+import SectionHeader from '../ui/SectionHeader';
+import { ADDITIONALS, EQUIPMENT } from './servicesData';
 
 const STAGGER: Variants = {
   hidden: { opacity: 0 },

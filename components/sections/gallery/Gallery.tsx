@@ -6,7 +6,7 @@ import { useCallback, useMemo, useState } from 'react';
 
 import Button from '@/components/ui/Button';
 import { CATEGORIES, type Category, type GalleryPhoto } from '@/lib/categories';
-import SectionHeader from '../SectionHeader';
+import SectionHeader from '../../ui/SectionHeader';
 
 const GalleryLightbox = dynamic(() => import('@/components/sections/gallery/GalleryLightbox'), {
   ssr: false,

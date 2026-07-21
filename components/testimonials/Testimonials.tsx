@@ -5,9 +5,9 @@ import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
 import Image from 'next/image';
 import { useRef } from 'react';
 
-import { TESTIMONIALS } from '@/content/data';
 import { cn } from '@/lib/utils';
-import SectionHeader from './SectionHeader';
+import SectionHeader from '../ui/SectionHeader';
+import { TESTIMONIALS } from './testimonialsData';
 
 const FADE_UP: Variants = {
   hidden: { opacity: 0, y: 30 },

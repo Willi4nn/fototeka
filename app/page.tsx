@@ -1,11 +1,11 @@
 import Footer from '@/components/layout/Footer';
 import Header from '@/components/layout/Header';
 import About from '@/components/sections/About';
-import Contact from '@/components/sections/Contact';
+import Contact from '@/components/sections/contact/Contact';
 import GallerySection from '@/components/sections/gallery/GallerySection';
 import Hero from '@/components/sections/Hero';
-import Services from '@/components/sections/Services';
-import Testimonials from '@/components/sections/Testimonials';
+import Services from '@/components/services/Services';
+import Testimonials from '@/components/testimonials/Testimonials';
 
 export const revalidate = false;
 

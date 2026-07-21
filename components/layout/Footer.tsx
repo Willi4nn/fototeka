@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { InstagramIcon, WhatsappIcon } from '@/content/data';
+import { InstagramIcon, WhatsappIcon } from '@/components/ui/Icons';
 import { NAV_LINKS } from '@/lib/navigation';
 import { INSTAGRAM_URL, WHATSAPP_URL } from '@/lib/site';
 

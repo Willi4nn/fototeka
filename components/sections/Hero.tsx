@@ -3,7 +3,7 @@
 import { motion, useReducedMotion } from 'framer-motion';
 
 import Button from '@/components/ui/Button';
-import { InstagramIcon } from '@/content/data';
+import { InstagramIcon } from '@/components/ui/Icons';
 import { PRIMARY_SECTION_LINKS } from '@/lib/navigation';
 import { INSTAGRAM_URL } from '@/lib/site';
 
