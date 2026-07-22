@@ -27,7 +27,7 @@ const jost = Jost({
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.fototeka.com.br';
 
 export const viewport: Viewport = {
-  themeColor: '#f9f0e4',
+  themeColor: '#120d0b',
   width: 'device-width',
   initialScale: 1,
   maximumScale: 1,
@@ -115,6 +115,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const websiteSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Foto Teka',
+    alternateName: ['FotoTeka'],
+    url: 'https://fototeka.com.br',
+  };
+
   return (
     <html
       lang="pt-BR"
@@ -128,6 +136,10 @@ export default function RootLayout({
           href="/hero/hero-poster.webp"
           type="image/webp"
           fetchPriority="high"
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
       </head>
       <body
