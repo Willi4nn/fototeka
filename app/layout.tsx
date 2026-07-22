@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Jost } from 'next/font/google';
 import localFont from 'next/font/local';
 
@@ -26,6 +26,13 @@ const jost = Jost({
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.fototeka.com.br';
 
+export const viewport: Viewport = {
+  themeColor: '#f9f0e4',
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
@@ -38,15 +45,20 @@ export const metadata: Metadata = {
     statusBarStyle: 'default',
   },
   description:
-    'Mais do que registrar imagens, a Foto Teka cria experiências. Aluguel de Totem Retrô, Espelho Mágico e Plataforma 360 para eventos em Patos de Minas e região.',
+    'Mais do que registrar imagens, a Foto Teka cria experiências inesquecíveis. Aluguel de Totem Retrô, Espelho Mágico e Plataforma 360 para eventos em Patos de Minas, BH e região.',
   keywords: [
     'Totem fotográfico Patos de Minas',
     'Cabine de fotos Patos de Minas',
-    'Plataforma 360',
-    'Espelho Mágico',
+    'Plataforma 360 Patos de Minas',
+    'Espelho Mágico Patos de Minas',
+    'Foto lembrança Alto Paranaíba',
+    'Totem fotográfico Belo Horizonte',
+    'Cabine de fotos BH',
+    'Plataforma 360 Região Metropolitana BH',
+    'Espelho Mágico Belo Horizonte',
     'Lembrancinha de casamento',
     'Totem retrô',
-    'Foto lembrança',
+    'Aluguel cabine de fotos',
     'Eventos corporativos',
   ],
   authors: [{ name: 'Foto Teka' }],
@@ -55,9 +67,17 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/',
   },
+  formatDetection: {
+    telephone: false,
+    email: false,
+    address: false,
+  },
+  verification: {
+    google: '_A7zhOaG4n0IPFyvb8O5yUJyRUKwmJ-EwDW2uO0YsEY',
+  },
   openGraph: {
     title: 'Foto Teka | Experiências Fotográficas',
-    description: 'Totem Retrô, Espelho Mágico e Plataforma 360 em Patos de Minas.',
+    description: 'Totem Retrô, Espelho Mágico e Plataforma 360 em Patos de Minas e Alto Paranaíba.',
     url: baseUrl,
     siteName: 'Foto Teka',
     locale: 'pt_BR',
@@ -67,7 +87,7 @@ export const metadata: Metadata = {
         url: '/20251130003147-2.webp',
         width: 1200,
         height: 630,
-        alt: 'Convidados se divertindo com o Totem da Foto Teka',
+        alt: 'Convidados se divertindo com o Totem da Foto Teka em Patos de Minas',
       },
     ],
   },

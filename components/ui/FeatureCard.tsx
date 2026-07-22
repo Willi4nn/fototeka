@@ -58,7 +58,7 @@ export default function FeatureCard({
       <motion.div variants={FOCUS} className="absolute inset-0 h-full w-full">
         <Image
           src={image}
-          alt={title}
+          alt={`Aluguel de ${title} para eventos em Patos de Minas e Região - Foto Teka`}
           fill
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           quality={60}

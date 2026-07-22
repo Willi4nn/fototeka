@@ -18,7 +18,8 @@ export default function Hero() {
           loop
           muted
           playsInline
-          preload="auto"
+          preload="metadata"
+          aria-label="Vídeo demonstrativo dos convidados se divertindo com as cabines da Foto Teka"
           poster="/hero/hero-poster.webp"
           className="h-full w-full object-cover object-center"
         >
@@ -35,9 +36,16 @@ export default function Hero() {
           transition={prefersReducedMotion ? undefined : { duration: 0.8, ease: 'easeOut' }}
           className="max-w-3xl"
         >
-          <h1 className="font-pesto mb-8 text-5xl leading-[1.1] text-white uppercase md:text-7xl">
-            A sua história <br /> merece ser eternizada.
+          <h1 className="sr-only">
+            Aluguel de Totem Fotográfico, Espelho Mágico e Plataforma 360 em Patos de Minas e Alto
+            Paranaíba
           </h1>
+          <p
+            aria-hidden="true"
+            className="font-pesto mb-8 text-5xl leading-[1.1] text-white uppercase md:text-7xl"
+          >
+            A sua história <br /> merece ser eternizada.
+          </p>
 
           <div className="mb-10 flex flex-col gap-4 sm:flex-row">
             <Button href={PRIMARY_SECTION_LINKS.contact} variant="primary" size="hero">
