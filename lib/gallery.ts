@@ -10,7 +10,7 @@ import type { Category, GalleryPhoto } from '@/lib/categories';
 const FOLDER_TO_CATEGORY: Record<string, Exclude<Category, 'TODOS'>> = {
   aniversarios: 'ANIVERSÁRIOS',
   casamentos: 'CASAMENTOS',
-  confraternizacoes: 'CORPORATIVOS',
+  confraternizacoes: 'CONFRATERNIZAÇÕES',
   corporativos: 'CORPORATIVOS',
   debutantes: 'DEBUTANTES',
   outros: 'OUTROS',
