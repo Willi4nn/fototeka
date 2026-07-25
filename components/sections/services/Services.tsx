@@ -121,7 +121,7 @@ export default function Services() {
         >
           {ADDITIONALS.map((item, index) => (
             <div key={index} className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-22px)]">
-              <FeatureCard {...item} />
+              <FeatureCard {...item} index={index} />
             </div>
           ))}
         </motion.ul>
