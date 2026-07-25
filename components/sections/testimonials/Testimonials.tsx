@@ -1,18 +1,13 @@
 'use client';
 
-import { motion, useReducedMotion, type Variants } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
 import Image from 'next/image';
 import { useRef } from 'react';
 
 import { cn } from '@/lib/utils';
-import SectionHeader from '../ui/SectionHeader';
+import SectionHeader from '../../ui/SectionHeader';
 import { TESTIMONIALS } from './testimonialsData';
-
-const FADE_UP: Variants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.25, 1, 0.5, 1] } },
-};
 
 export default function Testimonials() {
   const reduceMotion = useReducedMotion();
@@ -36,6 +31,7 @@ export default function Testimonials() {
         alt=""
         width={600}
         height={600}
+        unoptimized
         className="pointer-events-none absolute top-10 -right-32 z-0 h-auto w-auto opacity-40 md:top-1/4 md:-right-10"
       />
 
@@ -60,9 +56,9 @@ export default function Testimonials() {
 
           <motion.ul
             initial={reduceMotion ? undefined : 'hidden'}
-            whileInView={reduceMotion ? undefined : 'visible'}
-            viewport={{ once: true, amount: 0.1 }}
-            variants={FADE_UP}
+            whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.05 }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
             ref={scrollRef}
             className="flex w-full snap-x snap-mandatory scrollbar-none gap-4 overflow-x-auto pt-4 pb-12 [-ms-overflow-style:none] md:gap-8 lg:px-4 [&::-webkit-scrollbar]:hidden"
           >

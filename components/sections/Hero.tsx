@@ -1,11 +1,12 @@
 'use client';
 
-import { motion, useReducedMotion } from 'framer-motion';
-
 import Button from '@/components/ui/Button';
 import { InstagramIcon } from '@/components/ui/Icons';
 import { PRIMARY_SECTION_LINKS } from '@/lib/navigation';
 import { INSTAGRAM_URL } from '@/lib/site';
+import { motion, useReducedMotion } from 'framer-motion';
+
+const HERO_VIDEO_URL = 'https://pub-5cf0922fdd744f2885976ef0e101152e.r2.dev/hero-video.mp4';
 
 export default function Hero() {
   const prefersReducedMotion = useReducedMotion();
@@ -18,22 +19,20 @@ export default function Hero() {
           loop
           muted
           playsInline
-          preload="metadata"
-          aria-label="Vídeo demonstrativo dos convidados se divertindo com as cabines da Foto Teka"
+          preload="none"
           poster="/hero/hero-poster.webp"
           className="h-full w-full object-cover object-center"
         >
-          <source src="/hero/hero-video.webm" type="video/webm" />
-          <source src="/hero/hero-video.mp4" type="video/mp4" />
+          <source src={HERO_VIDEO_URL} type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-black/60 md:bg-black/50"></div>
+        <div className="absolute inset-0 bg-black/60 md:bg-black/50" />
       </div>
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pt-20 md:px-8 lg:px-12">
         <motion.div
-          initial={prefersReducedMotion ? false : { opacity: 0, y: 30 }}
+          initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
           animate={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
-          transition={prefersReducedMotion ? undefined : { duration: 0.8, ease: 'easeOut' }}
+          transition={prefersReducedMotion ? undefined : { duration: 0.6, ease: 'easeOut' }}
           className="max-w-3xl"
         >
           <h1 className="sr-only">

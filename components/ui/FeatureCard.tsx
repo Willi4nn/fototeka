@@ -11,17 +11,18 @@ const DEVELOP: Variants = {
     scale: 0.9,
     rotate: index % 2 === 0 ? -6 : 6,
   }),
-  visible: {
+  visible: (index: number) => ({
     opacity: 1,
     y: 0,
     scale: 1,
     rotate: 0,
     transition: {
       duration: 0.85,
+      delay: (index % 3) * 0.15,
       ease: [0.22, 1, 0.36, 1],
       rotate: { type: 'spring', stiffness: 140, damping: 14 },
     },
-  },
+  }),
 };
 
 const FOCUS: Variants = {
@@ -50,8 +51,11 @@ export default function FeatureCard({
   index = 0,
 }: FeatureCardProps) {
   return (
-    <motion.li
+    <motion.div
       custom={index}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
       variants={DEVELOP}
       className="group relative flex aspect-4/5 w-full flex-col justify-end overflow-hidden bg-black text-left shadow-lg transition-all duration-500 hover:z-10 hover:-translate-y-2 hover:shadow-2xl sm:aspect-3/4 md:aspect-4/5"
     >
@@ -61,7 +65,7 @@ export default function FeatureCard({
           alt={`Aluguel de ${title} para eventos em Patos de Minas e Região - Foto Teka`}
           fill
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          quality={60}
+          unoptimized
           loading="lazy"
           decoding="async"
           suppressHydrationWarning
@@ -76,7 +80,7 @@ export default function FeatureCard({
             aria-hidden="true"
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            quality={50}
+            unoptimized
             loading="lazy"
             decoding="async"
             suppressHydrationWarning
@@ -114,6 +118,6 @@ export default function FeatureCard({
         aria-hidden="true"
         className="pointer-events-none absolute top-5 right-5 size-6 border-t-[3px] border-r-[3px] border-white/80 opacity-0 transition-all delay-75 duration-500 group-focus-within:opacity-100 group-hover:opacity-100"
       />
-    </motion.li>
+    </motion.div>
   );
 }

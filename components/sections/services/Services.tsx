@@ -3,8 +3,8 @@
 import { motion, useReducedMotion, type Variants } from 'framer-motion';
 import Image from 'next/image';
 
-import FeatureCard from '../ui/FeatureCard';
-import SectionHeader from '../ui/SectionHeader';
+import FeatureCard from '../../ui/FeatureCard';
+import SectionHeader from '../../ui/SectionHeader';
 import { ADDITIONALS, EQUIPMENT } from './servicesData';
 
 const STAGGER: Variants = {
@@ -49,14 +49,14 @@ export default function Services() {
   const reduceMotion = useReducedMotion();
 
   const listAnimProps = {
-    initial: reduceMotion ? undefined : 'hidden',
+    initial: reduceMotion ? undefined : false,
     whileInView: reduceMotion ? undefined : 'visible',
     viewport: { once: true, amount: 0.1 },
     variants: STAGGER,
   };
 
   const headerAnimProps = {
-    initial: reduceMotion ? undefined : 'hidden',
+    initial: reduceMotion ? undefined : false,
     whileInView: reduceMotion ? undefined : 'visible',
     viewport: { once: true, amount: 0.3 },
     variants: FOCUS_IN,
@@ -104,7 +104,7 @@ export default function Services() {
         >
           {EQUIPMENT.map((item, index) => (
             <div key={index} className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-22px)]">
-              <FeatureCard index={index} {...item} />
+              <FeatureCard {...item} index={index} />
             </div>
           ))}
         </motion.ul>
@@ -121,7 +121,7 @@ export default function Services() {
         >
           {ADDITIONALS.map((item, index) => (
             <div key={index} className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-22px)]">
-              <FeatureCard index={index} {...item} />
+              <FeatureCard {...item} />
             </div>
           ))}
         </motion.ul>
