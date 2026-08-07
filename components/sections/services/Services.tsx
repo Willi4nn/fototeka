@@ -16,12 +16,11 @@ const STAGGER: Variants = {
 };
 
 const FOCUS_IN: Variants = {
-  hidden: { opacity: 0, y: 18, filter: 'blur(6px)' },
+  hidden: { opacity: 0, y: 18 },
   visible: {
     opacity: 1,
     y: 0,
-    filter: 'blur(0px)',
-    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
   },
 };
 
@@ -75,19 +74,20 @@ export default function Services() {
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 1.3, ease: [0.16, 1, 0.3, 1] }}
       >
-        <motion.div
-          animate={reduceMotion ? undefined : { rotate: 360 }}
-          transition={reduceMotion ? undefined : { duration: 90, repeat: Infinity, ease: 'linear' }}
+        <div
+          className={reduceMotion ? '' : 'animate-[spin_90s_linear_infinite]'}
+          style={{ willChange: 'transform' }}
         >
           <Image
             src="/logos/icon-circle-foto-teka.png"
             alt=""
             width={500}
             height={500}
-            priority
+            loading="lazy"
+            quality={50}
             className="h-auto w-auto opacity-80 md:w-150"
           />
-        </motion.div>
+        </div>
       </motion.div>
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 md:px-8 lg:px-12">

@@ -2,7 +2,7 @@
 
 import { motion, type Variants } from 'framer-motion';
 import Image from 'next/image';
-import type { ElementType } from 'react';
+import { useSyncExternalStore, type ElementType } from 'react';
 
 const DEVELOP: Variants = {
   hidden: (index: number) => ({
@@ -33,6 +33,26 @@ const FOCUS: Variants = {
   },
 };
 
+const HOVER_QUERY = '(hover: hover) and (pointer: fine)';
+
+function subscribeHover(callback: () => void) {
+  const mql = window.matchMedia(HOVER_QUERY);
+  mql.addEventListener('change', callback);
+  return () => mql.removeEventListener('change', callback);
+}
+
+function getHoverSnapshot() {
+  return window.matchMedia(HOVER_QUERY).matches;
+}
+
+function getHoverServerSnapshot() {
+  return false;
+}
+
+function useCanHover() {
+  return useSyncExternalStore(subscribeHover, getHoverSnapshot, getHoverServerSnapshot);
+}
+
 type FeatureCardProps = {
   title: string;
   description: string;
@@ -50,13 +70,17 @@ export default function FeatureCard({
   hoverImage,
   index = 0,
 }: FeatureCardProps) {
+  const canHover = useCanHover();
+  const showHoverImage = Boolean(hoverImage) && canHover;
+
   return (
     <motion.div
       custom={index}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
+      viewport={{ once: true, amount: 0.1 }}
       variants={DEVELOP}
+      style={{ willChange: 'transform, opacity' }}
       className="group relative flex aspect-4/5 w-full flex-col justify-end overflow-hidden bg-black text-left shadow-lg transition-all duration-500 hover:z-10 hover:-translate-y-2 hover:shadow-2xl sm:aspect-3/4 md:aspect-4/5"
     >
       <motion.div variants={FOCUS} className="absolute inset-0 h-full w-full">
@@ -65,26 +89,24 @@ export default function FeatureCard({
           alt={`Aluguel de ${title} para eventos em Patos de Minas e Região - Foto Teka`}
           fill
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          unoptimized
+          quality={65}
           loading="lazy"
           decoding="async"
-          suppressHydrationWarning
-          className={`object-cover transition-transform duration-1000 ease-out group-hover:scale-110 ${
-            hoverImage ? 'group-hover:opacity-0' : ''
+          className={`object-cover transition-transform duration-700 ease-out group-hover:scale-110 ${
+            showHoverImage ? 'group-hover:opacity-0' : ''
           }`}
         />
-        {hoverImage && (
+        {showHoverImage && (
           <Image
-            src={hoverImage}
+            src={hoverImage as string}
             alt=""
             aria-hidden="true"
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            unoptimized
+            quality={65}
             loading="lazy"
             decoding="async"
-            suppressHydrationWarning
-            className="scale-110 object-cover opacity-0 transition-opacity duration-1000 ease-out group-hover:opacity-100"
+            className="scale-110 object-cover opacity-0 transition-opacity duration-700 ease-out group-hover:opacity-100"
           />
         )}
       </motion.div>
