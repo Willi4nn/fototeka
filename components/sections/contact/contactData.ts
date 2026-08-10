@@ -14,7 +14,6 @@ export const eventTypes = [
 ];
 
 export const howKnowOptions = [
-  { id: '6', label: 'Não Informado' },
   { id: '8', label: 'Anúncio Casamentos.com.br' },
   { id: '5', label: 'Anúncio em Revistas/Jornais' },
   { id: '9878', label: 'Anúncio ZankYou.com.br' },

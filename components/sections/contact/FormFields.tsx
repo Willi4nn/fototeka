@@ -2,10 +2,10 @@ import { motion } from 'framer-motion';
 import { InputHTMLAttributes, SelectHTMLAttributes } from 'react';
 
 const labelClass =
-  'mb-1.5 ml-1 block font-sans text-[10px] font-bold uppercase tracking-widest text-brand-darkbrown/60';
+  'mb-1.5 ml-1 block font-sans text-xs font-bold uppercase tracking-widest text-brand-darkbrown/70';
 
 const getBaseInputClass = (hasError: boolean) =>
-  `w-full min-w-0 appearance-none rounded-none border px-4 py-2.5 font-sans text-[14px] outline-none transition-all duration-300 ${
+  `w-full min-w-0 appearance-none border px-4 py-3 font-sans text-[15px] outline-none transition-all duration-300 ${
     hasError
       ? 'border-red-500 bg-red-50 text-red-900 placeholder:text-red-400 focus:border-red-600 focus:ring-2 focus:ring-red-500/20'
       : 'border-brand-darkbrown/50 bg-brand-beige/20 text-brand-darkbrown placeholder:text-brand-darkbrown/50 hover:border-brand-terracotta/50 focus:border-brand-terracotta focus:bg-white focus:ring-2 focus:ring-brand-terracotta/20'
@@ -13,8 +13,8 @@ const getBaseInputClass = (hasError: boolean) =>
 
 const SelectIcon = ({ hasError }: { hasError: boolean }) => (
   <svg
-    className={`pointer-events-none absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 ${
-      hasError ? 'text-red-500' : 'text-brand-darkbrown/40'
+    className={`pointer-events-none absolute top-1/2 right-4 h-4 w-4 -translate-y-1/2 ${
+      hasError ? 'text-red-500' : 'text-brand-darkbrown/50'
     }`}
     fill="none"
     stroke="currentColor"
@@ -46,8 +46,16 @@ type FieldProps = InputHTMLAttributes<HTMLInputElement> & {
 export function Field({ colSpan, label, error, ...inputProps }: FieldProps) {
   return (
     <div className={colSpan}>
-      <label className={labelClass}>{label}</label>
-      <input {...inputProps} className={getBaseInputClass(!!error)} suppressHydrationWarning />
+      <label className={labelClass} htmlFor={inputProps.name}>
+        {label}
+      </label>
+      <input
+        {...inputProps}
+        id={inputProps.name}
+        className={getBaseInputClass(!!error)}
+        aria-invalid={!!error}
+        suppressHydrationWarning
+      />
       <ErrorMsg msg={error} />
     </div>
   );
@@ -71,12 +79,16 @@ export function SelectField({
 }: SelectFieldProps) {
   return (
     <div className={colSpan}>
-      <label className={labelClass}>{label}</label>
+      <label className={labelClass} htmlFor={selectProps.name}>
+        {label}
+      </label>
       <div className="relative">
         <select
           {...selectProps}
+          id={selectProps.name}
           defaultValue=""
           className={`${getBaseInputClass(!!error)} cursor-pointer pr-10`}
+          aria-invalid={!!error}
           suppressHydrationWarning
         >
           <option value="" disabled hidden>

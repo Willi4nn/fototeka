@@ -52,7 +52,10 @@ export default function Contact() {
   const todayStr = new Date().toISOString().split('T')[0];
 
   return (
-    <section id="contact" className="bg-brand-beige relative z-10 w-full overflow-hidden py-16">
+    <section
+      id="contact"
+      className="bg-brand-beige relative z-10 w-full overflow-hidden py-16 md:py-24"
+    >
       <SectionHeader subtitle="Vamos Conversar" title="Solicite seu Orçamento." />
 
       <div className="relative mx-auto max-w-3xl px-6 md:px-8">
@@ -65,7 +68,7 @@ export default function Contact() {
           suppressHydrationWarning
         />
 
-        <div className="shadow-brand-darkbrown/10 relative mx-auto bg-white p-6 shadow-xl sm:p-8 md:p-10">
+        <div className="shadow-brand-darkbrown/10 relative mx-auto bg-white p-6 shadow-2xl sm:p-8 md:p-10">
           <AnimatePresence mode="wait">
             {status === 'success' ? (
               <motion.div
@@ -74,21 +77,22 @@ export default function Contact() {
                 animate={{ opacity: 1, scale: 1 }}
                 className="flex flex-col items-center justify-center py-8 text-center md:py-12"
               >
-                <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-green-100 text-green-500">
-                  <svg className="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full border border-green-100 bg-green-50 text-green-500">
+                  <svg className="h-10 w-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      strokeWidth="3"
+                      strokeWidth="2.5"
                       d="M5 13l4 4L19 7"
                     />
                   </svg>
                 </div>
-                <h3 className="text-brand-darkbrown mb-2 font-sans text-xl font-bold md:text-2xl">
+                <h3 className="text-brand-darkbrown mb-3 font-sans text-2xl font-bold md:text-3xl">
                   Proposta a caminho!
                 </h3>
-                <p className="text-brand-darkbrown/70 mb-8 max-w-sm font-sans text-sm leading-relaxed">
-                  Detalhes recebidos. Nossa equipe entrará em contato rapidamente!
+                <p className="text-brand-darkbrown/70 mb-8 max-w-md font-sans text-base leading-relaxed">
+                  Recebemos os detalhes do seu evento. Nossa equipe entrará em contato com você
+                  muito em breve.
                 </p>
                 <Button variant="primary" size="header" onClick={resetForm}>
                   Nova Solicitação
@@ -104,7 +108,7 @@ export default function Contact() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0, filter: 'blur(4px)' }}
-                className="grid grid-cols-1 gap-4 md:grid-cols-12"
+                className="grid grid-cols-1 gap-5 md:grid-cols-12"
                 noValidate
                 suppressHydrationWarning
               >
@@ -198,20 +202,20 @@ export default function Contact() {
                 />
 
                 <div className="mt-2 flex flex-col items-center md:col-span-12">
-                  <label className="text-brand-darkbrown/60 mb-3 text-center font-sans text-[10px] font-bold tracking-widest uppercase">
+                  <label className="text-brand-darkbrown/70 mb-3 block text-center font-sans text-xs font-bold tracking-widest uppercase">
                     Como prefere receber o orçamento?
                   </label>
 
-                  <div className="border-brand-darkbrown/50 bg-brand-beige/20 flex w-full overflow-hidden border sm:w-auto">
+                  <div className="border-brand-darkbrown/10 bg-brand-beige/20 flex w-full overflow-hidden border sm:w-auto">
                     {contactMethods.map((m) => (
                       <button
                         key={m}
                         type="button"
                         onClick={() => setMethod(m)}
-                        className={`border-brand-darkbrown/50 flex-1 border-r px-5 py-2 font-sans text-xs font-semibold transition-all last:border-r-0 sm:flex-none ${
+                        className={`flex-1 px-6 py-2.5 font-sans text-sm font-semibold transition-all duration-300 sm:flex-none ${
                           method === m
-                            ? 'bg-brand-terracotta text-white shadow-inner'
-                            : 'text-brand-darkbrown/60 hover:bg-brand-beige/50 hover:text-brand-darkbrown'
+                            ? 'bg-brand-terracotta text-white shadow-md'
+                            : 'text-brand-darkbrown/60 hover:text-brand-darkbrown hover:bg-brand-darkbrown/05'
                         }`}
                       >
                         {m}
@@ -229,7 +233,7 @@ export default function Contact() {
                     className="w-full sm:w-auto"
                   >
                     {status === 'submitting' ? (
-                      <span className="flex items-center gap-2">
+                      <>
                         <svg className="h-5 w-5 animate-spin" viewBox="0 0 24 24" fill="none">
                           <circle
                             className="opacity-25"
@@ -246,7 +250,7 @@ export default function Contact() {
                           />
                         </svg>
                         Enviando...
-                      </span>
+                      </>
                     ) : (
                       'Enviar Solicitação'
                     )}
