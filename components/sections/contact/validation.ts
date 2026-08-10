@@ -9,7 +9,7 @@ export const formatPhone = (d: string) => {
 const validators: Record<string, (fd: FormData, phone: string) => string | null> = {
   fnome: (fd) => {
     const nome = ((fd.get('fnome') as string) || '').trim();
-    return nome.length < 4 || nome.split(/\s+/).length < 2 ? 'Informe seu nome e sobrenome.' : null;
+    return nome.length < 4 ? 'Informe seu nome completo' : null;
   },
   femail: (fd) => {
     const email = (fd.get('femail') as string) || '';
