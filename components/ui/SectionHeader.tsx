@@ -1,8 +1,9 @@
 import { cn } from '@/lib/utils';
+import { ReactNode } from 'react';
 
 type SectionHeaderProps = {
   subtitle?: string;
-  title: string;
+  title: ReactNode;
   className?: string;
   subtitleClassName?: string;
   titleClassName?: string;
@@ -22,7 +23,7 @@ export default function SectionHeader({
       {subtitle && (
         <p
           className={cn(
-            'text-brand-terracotta font-madelyn mb-1 text-5xl md:text-6xl',
+            'text-brand-terracotta font-madelyn mb-[-8] text-5xl md:text-6xl',
             subtitleClassName,
           )}
         >

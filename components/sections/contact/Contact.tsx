@@ -125,6 +125,7 @@ export default function Contact() {
                   name="fnome"
                   type="text"
                   placeholder="Nome e Sobrenome"
+                  maxLength={100}
                   onChange={handleChange}
                   error={errors.fnome}
                 />
@@ -135,6 +136,7 @@ export default function Contact() {
                   name="femail"
                   type="email"
                   placeholder="seu@melhoremail.com"
+                  maxLength={100}
                   onChange={handleChange}
                   error={errors.femail}
                 />
@@ -195,6 +197,7 @@ export default function Contact() {
                   name="flocalevento"
                   type="text"
                   placeholder="Nome do salão ou cidade"
+                  maxLength={150}
                   onChange={handleChange}
                   error={errors.flocalevento}
                 />

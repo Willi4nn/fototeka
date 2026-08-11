@@ -4,6 +4,7 @@ import { cn } from '@/lib/utils';
 import { Camera, Glasses, Images, Infinity as InfinityIcon, Palette, Users } from 'lucide-react';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import SectionHeader from '../ui/SectionHeader';
 
 const beneficios = [
   {
@@ -99,17 +100,19 @@ export default function About() {
       <div className="relative z-10 mx-auto w-full max-w-7xl px-6 md:px-8 lg:px-12">
         <div className="grid grid-cols-1 items-center lg:grid-cols-[1fr_1.1fr] lg:gap-8">
           <div className="mx-auto max-w-120 lg:mx-0">
-            <p className="text-brand-terracotta font-madelyn mb-1 text-center text-5xl md:text-6xl lg:text-left">
-              Nosso Propósito
-            </p>
-
-            <h2 className="text-brand-darkbrown mb-4 text-center font-sans text-[2.25rem] leading-[1.05] font-black tracking-tight uppercase md:text-[3rem] lg:text-left">
-              Mais que fotos,
-              <br />
-              criamos experiências.
-            </h2>
-
-            <div className="bg-brand-terracotta mx-auto mb-6 h-1.25 w-25 lg:mx-0" />
+            <SectionHeader
+              subtitle="Nosso Propósito"
+              title={
+                <>
+                  Mais que fotos,
+                  <br />
+                  criamos experiências.
+                </>
+              }
+              className="lg:items-start lg:text-left"
+              subtitleClassName="lg:text-left"
+              titleClassName="text-[2.25rem] leading-[1.05] tracking-tight md:text-[3rem]"
+            />
 
             <div className="text-brand-darkbrown space-y-4 text-center text-[15px] leading-relaxed font-medium lg:text-left">
               <p>
