@@ -77,7 +77,7 @@ export default function Contact() {
                 animate={{ opacity: 1, scale: 1 }}
                 className="flex flex-col items-center justify-center py-8 text-center md:py-12"
               >
-                <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full border border-green-100 bg-green-50 text-green-500">
+                <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full border-4 border-green-500 bg-green-100 text-green-500">
                   <svg className="h-10 w-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path
                       strokeLinecap="round"
@@ -91,8 +91,8 @@ export default function Contact() {
                   Proposta a caminho!
                 </h3>
                 <p className="text-brand-darkbrown/70 mb-8 max-w-md font-sans text-base leading-relaxed">
-                  Recebemos os detalhes do seu evento. Nossa equipe entrará em contato com você
-                  muito em breve.
+                  Obrigado pelo carinho e interesse! Já recebemos as informações e em breve
+                  entraremos em contato com todos os detalhes para o seu dia especial.
                 </p>
                 <Button variant="primary" size="header" onClick={resetForm}>
                   Nova Solicitação
@@ -113,12 +113,9 @@ export default function Contact() {
                 suppressHydrationWarning
               >
                 <input type="hidden" name="fcelular" value={phone} suppressHydrationWarning />
-                <input
-                  type="hidden"
-                  name="full_fcelular"
-                  value={`+55${phone}`}
-                  suppressHydrationWarning
-                />
+
+                <input type="hidden" name="full_fcelular" value="+55" suppressHydrationWarning />
+
                 <input type="hidden" name="fcomo" value={method} suppressHydrationWarning />
                 <input type="hidden" name="fid" value="" suppressHydrationWarning />
 
@@ -145,6 +142,7 @@ export default function Contact() {
                 <Field
                   colSpan="md:col-span-4"
                   label="WhatsApp"
+                  name="whatsapp_visual"
                   type="tel"
                   placeholder="(34) 99999-9999"
                   value={formatPhone(phone)}
@@ -234,7 +232,11 @@ export default function Contact() {
                   >
                     {status === 'submitting' ? (
                       <>
-                        <svg className="h-5 w-5 animate-spin" viewBox="0 0 24 24" fill="none">
+                        <svg
+                          className="mr-2 inline-block h-5 w-5 animate-spin"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                        >
                           <circle
                             className="opacity-25"
                             cx="12"
