@@ -119,12 +119,12 @@ export default function Footer() {
           <p className="text-brand-beige/40 text-[13px]">
             Desenvolvido por{' '}
             <a
-              href="https://wa.me/5534999903558?text=Ol%C3%A1%2C%20Willian%21%20Vi%20o%20site%20que%20voc%C3%AA%20desenvolveu%20para%20a%20Foto%20Teka%20e%20me%20interessei.%20Queria%20saber%20mais%20sobre%20como%20ter%20um%20site%20assim%20para%20o%20meu%20neg%C3%B3cio%21"
+              href="https://wa.me/5534999069861?text=Ol%C3%A1%2C%20Willian%21%20Vi%20o%20site%20que%20a%20Scalee%20desenvolveu%20para%20a%20Foto%20Teka%20e%20me%20interessei.%20Queria%20saber%20mais%20sobre%20como%20ter%20um%20site%20assim%20para%20o%20meu%20neg%C3%B3cio%21"
               target="_blank"
               rel="noopener noreferrer"
               className="text-brand-beige/60 hover:text-brand-terracotta font-medium underline transition-colors duration-300"
             >
-              Willian Pereira
+              Willian Pereira | Scalee
             </a>
           </p>
         </div>
